@@ -1,0 +1,183 @@
+@import 'tailwindcss';
+
+/* ───────────────────────── 設計 token ─────────────────────────
+   配色語意化：靛紫 = 以太坊/網路、墨綠 = 報酬/收益、深墨藍 = hero 底。
+   字體：Fraunces（英文標題）+ Noto Sans TC（中文內文）+ JetBrains Mono（數據）。 */
+@theme {
+  --color-ink: #15151d;
+  --color-ink-2: #1e1e2b;
+  --color-ink-line: #2c2c3d;
+
+  --color-paper: #f3f5f3;
+  --color-card: #ffffff;
+  --color-line: #e4e5e0;
+
+  --color-text: #1a1a22;
+  --color-muted: #6c6c79;
+  --color-faint: #9a9aa6;
+
+  --color-eth: #6e66e8;
+  --color-eth-2: #8a83f0;
+  --color-eth-soft: #ece9fc;
+
+  --color-yield: #16876a;
+  --color-yield-soft: #e1f1ea;
+
+  --color-warn: #b9542f;
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-sans: 'Noto Sans TC', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* 標題用 Fraunces，視覺重量集中在這裡 */
+.font-display {
+  font-optical-sizing: auto;
+}
+
+/* ── 招牌：八面體 + 收益環的旋轉動畫 ── */
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 22s linear infinite;
+}
+.animate-float {
+  animation: float-soft 6s ease-in-out infinite;
+}
+
+/* 捲動進場：預設隱藏，加上 .in 後升起 */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── 文章內文排版（給 path / learn 頁面用） ── */
+.prose {
+  color: var(--color-muted);
+  font-size: 1.0625rem;
+  line-height: 1.85;
+}
+.prose > * + * {
+  margin-top: 1.15rem;
+}
+.prose h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.6rem;
+  line-height: 1.25;
+  color: var(--color-text);
+  margin-top: 2.75rem;
+  letter-spacing: -0.01em;
+}
+.prose h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: var(--color-text);
+  margin-top: 1.75rem;
+}
+.prose strong {
+  font-weight: 600;
+  color: var(--color-text);
+}
+.prose a {
+  color: var(--color-eth);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.prose ul {
+  list-style: none;
+  padding: 0;
+}
+.prose li {
+  position: relative;
+  padding-left: 1.4rem;
+  margin-top: 0.5rem;
+}
+.prose li::before {
+  content: '◆';
+  position: absolute;
+  left: 0;
+  top: 0.05em;
+  color: var(--color-eth);
+  font-size: 0.7em;
+}
+.prose .callout {
+  border-left: 3px solid var(--color-warn);
+  background: #fbf2ee;
+  border-radius: 0 8px 8px 0;
+  padding: 1rem 1.25rem;
+  color: var(--color-text);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+.prose .note {
+  border-left: 3px solid var(--color-eth);
+  background: var(--color-eth-soft);
+  border-radius: 0 8px 8px 0;
+  padding: 1rem 1.25rem;
+  color: var(--color-text);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-spin-slow,
+  .animate-float {
+    animation: none;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
