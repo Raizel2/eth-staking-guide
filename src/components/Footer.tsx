@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Diamond } from './Diamond'
+import { SourceLink } from './ui'
 
 export function Footer() {
   return (
@@ -22,12 +23,14 @@ export function Footer() {
             </span>
           </Link>
           <div className="font-mono text-xs">
-            資料來源 · CoinGecko · Lido · Rocket Pool ·{' '}
+            資料來源 · <SourceLink name="CoinGecko" /> ·{' '}
+            <SourceLink name="ultrasound.money" /> · <SourceLink name="DefiLlama" />{' '}
+            ·{' '}
             <a
               href="https://ethereum.org/zh-tw/staking/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-eth-2 underline-offset-2 hover:underline"
+              className="underline decoration-dotted underline-offset-2 hover:text-eth-2"
             >
               ethereum.org
             </a>

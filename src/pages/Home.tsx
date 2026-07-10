@@ -4,7 +4,7 @@ import { useReveal } from '../lib/useReveal'
 import { Diamond } from '../components/Diamond'
 import { Calculator } from '../components/Calculator'
 import { Quiz } from '../components/Quiz'
-import { Eyebrow, StatCard } from '../components/ui'
+import { Eyebrow, StatCard, SourceLink } from '../components/ui'
 import { fmtUSD, fmtPct, fmtMillions, fmtInt } from '../lib/format'
 import { METHOD_GROUPS } from '../lib/methods'
 
@@ -56,7 +56,9 @@ function Hero() {
           </div>
 
           <p className="mt-6 font-mono text-[11px] leading-relaxed text-white/40">
-            * 數據為即時,從 CoinGecko · DefiLlama · ultrasound.money 抓取,僅供參考。
+            * 數據為即時,從 <SourceLink name="CoinGecko" /> ·{' '}
+            <SourceLink name="DefiLlama" /> · <SourceLink name="ultrasound.money" />{' '}
+            抓取,僅供參考。
           </p>
         </div>
 
@@ -285,7 +287,9 @@ function Leaderboard() {
             質押本身。
           </p>
         </div>
-        <span className="font-mono text-[11px] text-faint">來源 · DefiLlama</span>
+        <span className="font-mono text-[11px] text-faint">
+          來源 · <SourceLink name="DefiLlama" />
+        </span>
       </div>
 
       {live.loading ? (

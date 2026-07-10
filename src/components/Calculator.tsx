@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type { LiveData } from '../lib/useLiveData'
-import { Eyebrow } from './ui'
+import { Eyebrow, SourceLink } from './ui'
 
 // 質押試算器：左卡設定（方式 + 投入量），右卡顯示預估總額 + 成長曲線 + 期間分頁。
 // 借鏡交易所 earn 頁的雙卡版面，但維持誠實教育立場：
@@ -290,7 +290,10 @@ export function Calculator({ live }: { live: LiveData }) {
           即時計算
         </span>
         <span>· 每次載入更新{live.updatedAt ? ` · ${live.updatedAt.toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit' })}` : ''}</span>
-        <span>· 來源 ultrasound.money · DefiLlama · CoinGecko</span>
+        <span>
+          · 來源 <SourceLink name="ultrasound.money" /> ·{' '}
+          <SourceLink name="DefiLlama" /> · <SourceLink name="CoinGecko" />
+        </span>
       </p>
     </div>
   )
