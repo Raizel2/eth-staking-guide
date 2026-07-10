@@ -2,8 +2,8 @@
 // 三大方式:自己跑節點 / SaaS 質押 / 流動性質押。
 // 流動性質押底下再分:幣安 WBETH(CeFi,最無腦)與 Lido(DeFi,自管)。
 
-// ⚠️ TODO: 換成你的幣安推薦連結(帶回饋 + 使用者省手續費)
-export const BINANCE_REF_URL = 'https://accounts.binance.com/register?ref=XXXXXX'
+// 幣安推薦連結(帶回饋 + 使用者省手續費)
+export const BINANCE_REF_URL = 'https://www.binance.com/zh-TC/join?ref=AW03B9AK'
 
 export type DestKey = 'binance' | 'lido' | 'figment' | 'solo'
 
