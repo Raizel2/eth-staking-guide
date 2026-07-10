@@ -34,11 +34,10 @@ function Hero() {
           </h1>
 
           <p className="mt-6 max-w-md text-base leading-relaxed text-white/70 md:text-lg">
-            把你的 ETH 鎖進網路、幫忙維護它,網路就分獎勵給你。
+            質押是指將 ETH 存入驗證者節點，協助區塊驗證並賺取被動收益的操作。
             <span className="text-white/90">
-              各種質押方式、各家的收益預測值不同
+              本站整理鏈上實時數據、教學、與 0 基礎新手指南。
             </span>
-            ——詳細數據都在下面。
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
