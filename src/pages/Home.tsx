@@ -25,7 +25,7 @@ function Hero() {
         <div>
           <div className="mb-6 flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-eth-2">
             <span className="size-1.5 animate-pulse rounded-full bg-yield" />
-            實時 ETH 收益率
+            實時 ETH 質押收益率 · 年化 APY
           </div>
 
           <h1 className="font-display text-6xl font-semibold leading-none tracking-tight tabular-nums md:text-8xl">
