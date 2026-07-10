@@ -223,17 +223,17 @@ export function Calculator({ live }: { live: LiveData }) {
       </div>
 
       {/* ── 右卡：結果 + 曲線 ── */}
-      <div className="flex flex-col rounded-2xl border border-line bg-ink p-7 text-white shadow-[0_8px_30px_rgba(20,20,30,0.18)] md:p-8">
+      <div className="flex flex-col rounded-2xl border border-eth/30 bg-eth-soft/40 p-7 text-text shadow-[0_8px_30px_rgba(110,102,232,0.08)] md:p-8">
         <div className="flex items-start justify-between">
           <div>
-            <div className="font-mono text-xs uppercase tracking-wider text-white/50">
+            <div className="font-mono text-xs uppercase tracking-wider text-muted">
               {years} 年後預估總額
             </div>
             <div className="mt-2 font-display text-4xl font-semibold text-yield tabular-nums md:text-5xl">
               {live.loading ? '··' : ethStr(total)}{' '}
-              <span className="text-2xl text-white/70">ETH</span>
+              <span className="text-2xl text-muted">ETH</span>
             </div>
-            <div className="mt-1 font-mono text-sm text-white/55">
+            <div className="mt-1 font-mono text-sm text-muted">
               ≈ {toFiat(total)} USD
             </div>
           </div>
@@ -253,7 +253,7 @@ export function Calculator({ live }: { live: LiveData }) {
               className={`rounded-lg py-2 font-mono text-sm transition-colors ${
                 years === p
                   ? 'bg-eth text-white'
-                  : 'bg-white/5 text-white/55 hover:bg-white/10'
+                  : 'bg-card text-muted hover:text-eth'
               }`}
             >
               {p} 年
@@ -262,21 +262,21 @@ export function Calculator({ live }: { live: LiveData }) {
         </div>
 
         {/* 明細 */}
-        <dl className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-white/10 bg-white/10 font-mono text-sm">
-          <div className="bg-ink p-4">
-            <dt className="text-xs text-white/45">投入本金</dt>
-            <dd className="mt-1 tabular-nums">{ethStr(amount)} ETH</dd>
+        <dl className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-line bg-line font-mono text-sm">
+          <div className="bg-card p-4">
+            <dt className="text-xs text-faint">投入本金</dt>
+            <dd className="mt-1 tabular-nums text-text">{ethStr(amount)} ETH</dd>
           </div>
-          <div className="bg-ink p-4">
-            <dt className="text-xs text-white/45">累積報酬</dt>
+          <div className="bg-card p-4">
+            <dt className="text-xs text-faint">累積報酬</dt>
             <dd className="mt-1 tabular-nums text-yield">
               + {live.loading ? '··' : ethStr(reward)} ETH
             </dd>
           </div>
         </dl>
 
-        <p className="mt-5 text-[11px] leading-relaxed text-white/40">
-          依目前 APR 複利推估，<strong className="text-white/60">非保證</strong>
+        <p className="mt-5 text-[11px] leading-relaxed text-faint">
+          依目前 APR 複利推估，<strong className="text-muted">非保證</strong>
           ；APR 會隨參與人數浮動，未計手續費、稅與幣價變動。報酬以 ETH
           計——顆數變多，幣價下跌仍可能讓帳面縮水。
         </p>

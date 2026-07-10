@@ -76,23 +76,23 @@ export function Quiz() {
         ) : (
           <div className="overflow-hidden rounded-2xl border border-line bg-card shadow-[0_8px_30px_rgba(20,20,30,0.06)] md:grid md:grid-cols-[0.9fr_1.1fr]">
             {/* 左:問題 */}
-            <div className="flex flex-col justify-between gap-6 border-b border-line bg-ink p-8 text-white md:border-b-0 md:border-r md:border-ink-line">
-              <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-eth-2">
+            <div className="flex flex-col justify-between gap-6 border-b border-line bg-eth-soft/60 p-8 md:border-b-0 md:border-r">
+              <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-eth">
                 <Diamond size={13} />
                 第 {history.length + 1} 題
               </div>
-              <h3 className="font-display text-2xl font-semibold leading-snug md:text-3xl">
+              <h3 className="font-display text-2xl font-semibold leading-snug text-text md:text-3xl">
                 {step.q}
               </h3>
               {history.length > 0 ? (
                 <button
                   onClick={back}
-                  className="w-fit font-mono text-xs text-white/45 transition-colors hover:text-white"
+                  className="w-fit font-mono text-xs text-muted transition-colors hover:text-text"
                 >
                   ← 上一題
                 </button>
               ) : (
-                <span className="font-mono text-xs text-white/35">
+                <span className="font-mono text-xs text-faint">
                   依你的狀況,給你最適合的起點
                 </span>
               )}
@@ -131,17 +131,17 @@ function ResultCard({ result, onReset }: { result: DestKey; onReset: () => void 
   const m = DESTINATIONS[result]
   return (
     <div className="overflow-hidden rounded-2xl border border-eth bg-card shadow-[0_12px_40px_rgba(110,102,232,0.15)] md:grid md:grid-cols-[1fr_1fr]">
-      <div className="bg-ink p-8 text-white md:p-10">
-        <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-eth-2">
+      <div className="bg-eth p-8 text-white md:p-10">
+        <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-white/80">
           <Diamond size={14} />
           最適合你的起點
         </div>
         <div className="mt-3 font-display text-4xl font-semibold md:text-5xl">
           {m.name}
         </div>
-        <p className="mt-3 text-white/70">{m.blurb}</p>
+        <p className="mt-3 text-white/85">{m.blurb}</p>
         {result === 'binance' && (
-          <p className="mt-4 text-[11px] leading-relaxed text-white/40">
+          <p className="mt-4 text-[11px] leading-relaxed text-white/60">
             WBETH 由幣安保管——最無腦,適合新手與已在幣安的人。堅持私鑰完全自管,選 Lido 或冷錢包更合適。
           </p>
         )}

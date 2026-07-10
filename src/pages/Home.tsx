@@ -17,25 +17,28 @@ function Hero() {
       : '···'
 
   return (
-    <section id="top" className="relative overflow-hidden bg-ink text-white">
-      <div className="pointer-events-none absolute -right-32 -top-32 size-[480px] rounded-full bg-eth/20 blur-[120px]" />
-      <div className="pointer-events-none absolute -bottom-40 -left-20 size-[420px] rounded-full bg-yield/10 blur-[120px]" />
+    <section
+      id="top"
+      className="relative overflow-hidden bg-gradient-to-b from-eth-soft/50 via-paper to-paper text-text"
+    >
+      <div className="pointer-events-none absolute -right-32 -top-32 size-[480px] rounded-full bg-eth/15 blur-[120px]" />
+      <div className="pointer-events-none absolute -bottom-40 -left-20 size-[420px] rounded-full bg-eth-2/10 blur-[120px]" />
 
       <div className="mx-auto grid max-w-6xl items-center gap-8 px-5 py-20 md:grid-cols-[1fr_0.9fr] md:py-28">
         <div>
-          <div className="mb-6 flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-eth-2">
+          <div className="mb-6 flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-eth">
             <span className="size-1.5 animate-pulse rounded-full bg-yield" />
             當前 ETH 質押收益率 (APY)
           </div>
 
-          <h1 className="font-display text-6xl font-semibold leading-none tracking-tight tabular-nums md:text-8xl">
+          <h1 className="font-display text-6xl font-semibold leading-none tracking-tight tabular-nums text-ink md:text-8xl">
             {range}
-            <span className="align-super text-2xl text-white md:text-3xl">*</span>
+            <span className="align-super text-2xl text-eth md:text-3xl">*</span>
           </h1>
 
-          <p className="mt-6 max-w-md text-base leading-relaxed text-white/70 md:text-lg">
+          <p className="mt-6 max-w-md text-base leading-relaxed text-muted md:text-lg">
             質押是指將 ETH 存入驗證者節點，協助區塊驗證並賺取被動收益的操作。
-            <span className="text-white/90">
+            <span className="font-medium text-text">
               本站彙整鏈上實時數據、教學、與 0 基礎新手指南。
             </span>
           </p>
@@ -49,13 +52,13 @@ function Hero() {
             </a>
             <a
               href="#learn"
-              className="rounded-lg border border-white/20 px-6 py-3 text-sm font-medium text-white/80 transition-colors hover:border-white/50 hover:text-white"
+              className="rounded-lg border border-line bg-card px-6 py-3 text-sm font-medium text-text transition-colors hover:border-eth hover:text-eth"
             >
               什麼是以太幣質押
             </a>
           </div>
 
-          <p className="mt-6 font-mono text-[11px] leading-relaxed text-white/40">
+          <p className="mt-6 font-mono text-[11px] leading-relaxed text-faint">
             * 實時浮動,資料源 <SourceLink name="DefiLlama" />、{' '}
             <SourceLink name="ultrasound.money" />。
           </p>
@@ -150,13 +153,13 @@ function Learn() {
     ],
   ]
   return (
-    <section id="learn" className="bg-ink py-20 text-white md:py-24">
+    <section id="learn" className="bg-eth-soft/30 py-20 md:py-24">
       <div className="mx-auto max-w-6xl px-5">
         <div className="reveal max-w-3xl">
-          <h2 className="font-display text-4xl font-semibold leading-tight tracking-tight md:text-5xl">
+          <h2 className="font-display text-4xl font-semibold leading-tight tracking-tight text-text md:text-5xl">
             什麼是以太幣質押？
           </h2>
-          <p className="mt-5 text-lg leading-relaxed text-white/70">
+          <p className="mt-5 text-lg leading-relaxed text-muted">
             把 ETH
             鎖進以太坊的安全機制、幫忙確認交易，網路再發獎勵給你。它不像挖礦要拼電費與顯卡，靠的是「押上本金、誠實做事」。想從頭弄懂，從這三篇開始。
           </p>
@@ -167,13 +170,13 @@ function Learn() {
             <Link
               key={to}
               to={to}
-              className="group rounded-xl border border-ink-line bg-ink-2 p-6 transition-colors hover:border-eth"
+              className="group rounded-xl border border-line bg-card p-6 transition-colors hover:border-eth"
             >
-              <h3 className="font-display text-xl font-semibold">{title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-white/55">
-                {desc}
-              </p>
-              <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-eth-2 transition-transform group-hover:translate-x-1">
+              <h3 className="font-display text-xl font-semibold text-text">
+                {title}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted">{desc}</p>
+              <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-eth transition-transform group-hover:translate-x-1">
                 閱讀 →
               </span>
             </Link>

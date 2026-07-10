@@ -110,12 +110,13 @@ export function useLiveData(): LiveData {
         ),
         getJSON('https://api.rocketpool.net/api/mainnet/payload'),
         getJSON('https://ultrasound.money/api/v2/fees/validator-rewards'),
+        getJSON('https://ultrasound.money/api/v2/fees/eth-supply-parts'),
         ...PROTOCOLS.map(fetchProtocol),
       ])
 
       if (!alive) return
 
-      const [priceR, rpR, soloR, ...protoR] = results
+      const [priceR, rpR, soloR, supplyR, ...protoR] = results
 
       // 價格
       let price: number | null = null
@@ -125,18 +126,27 @@ export function useLiveData(): LiveData {
         priceChange24h = priceR.value?.ethereum?.usd_24h_change ?? null
       }
 
-      // 全網數據（Rocket Pool payload）
-      let totalStaked: number | null = null
+      // 驗證者數 / ETH 總供給 / 共識基準 APR：Rocket Pool payload
       let validators: number | null = null
       let totalSupply: number | null = null
       let beaconApr: number | null = null
       if (rpR.status === 'fulfilled') {
         const d = rpR.value
-        totalStaked = parseNum(d?.ethStaked)
         validators = parseNum(d?.validators)
         totalSupply = parseNum(d?.ethTotalSupply)
         const beaconRaw = parseNum(d?.beaconChainAPR)
         beaconApr = beaconRaw != null ? beaconRaw * 100 : null
+      }
+
+      // 全網質押量：改用 ultrasound（信標鏈總餘額,Gwei→ETH,約 40M)。
+      // RP payload 的 ethStaked 偏低(~32M),與 stakingRewards/ultrasound 不符,故棄用。
+      let totalStaked: number | null = null
+      if (supplyR.status === 'fulfilled') {
+        const g = parseNum(supplyR.value?.beaconBalancesSum)
+        totalStaked = g != null ? g / 1e9 : null
+      }
+      if (totalStaked == null && rpR.status === 'fulfilled') {
+        totalStaked = parseNum(rpR.value?.ethStaked) // 退而求其次
       }
       const stakingRatio =
         totalStaked != null && totalSupply

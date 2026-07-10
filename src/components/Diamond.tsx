@@ -1,13 +1,12 @@
 // 招牌元素:以太坊八面體。
-//  ring=false → 純鑽石(nav / 項目符號 / 分隔用,實心)
-//  ring=true  → hero 用的科技 HUD 版:全像霓虹八面體 + 3D 軌道環 + 雷達掃描 + 角標
+//  ring=false → 純鑽石(nav / bullet)
+//  ring=true  → hero 用:立體八面體 + 3D 軌道環 + 柔和光暈(淺底友善)
 
-// 實心小鑽石(nav / bullet)
-function SolidGem({ size }: { size: number }) {
+function Gem({ size }: { size: number }) {
   return (
     <svg
       width={size}
-      height={size}
+      height={size * 1.25}
       viewBox="0 0 32 40"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -17,34 +16,12 @@ function SolidGem({ size }: { size: number }) {
       <path d="M16 1 L30 18 L16 25 Z" fill="var(--color-eth)" />
       <path d="M2 18 L16 25 L16 39 Z" fill="var(--color-eth)" opacity="0.85" />
       <path d="M30 18 L16 25 L16 39 Z" fill="#4f48bd" />
-    </svg>
-  )
-}
-
-// 霓虹全像八面體(hero)
-function NeonGem({ px }: { px: number }) {
-  return (
-    <svg
-      width={px}
-      height={px * 1.25}
-      viewBox="0 0 32 40"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-      style={{ filter: 'drop-shadow(0 0 14px rgba(138,131,240,0.85))' }}
-    >
-      {/* 半透明面(玻璃/全像感) */}
-      <path d="M16 1 L30 18 L16 25 L2 18 Z" fill="var(--color-eth-2)" opacity="0.55" />
-      <path d="M16 1 L30 18 L16 25 Z" fill="var(--color-eth)" opacity="0.7" />
-      <path d="M2 18 L16 25 L16 39 Z" fill="var(--color-eth)" opacity="0.45" />
-      <path d="M30 18 L16 25 L16 39 Z" fill="#4f48bd" opacity="0.7" />
-      {/* 霓虹亮邊 */}
-      <g stroke="#c9c5ff" strokeWidth="0.7" strokeLinejoin="round">
-        <path d="M16 1 L30 18 L16 39 L2 18 Z" />
-        <path d="M2 18 L30 18" strokeOpacity="0.8" />
-        <path d="M16 1 L16 25 M16 25 L16 39" strokeOpacity="0.6" />
-        <path d="M16 25 L2 18 M16 25 L30 18" strokeOpacity="0.5" />
-      </g>
+      <path
+        d="M16 1 L30 18 L16 25 L2 18 Z"
+        stroke="#ffffff"
+        strokeOpacity="0.35"
+        strokeWidth="0.5"
+      />
     </svg>
   )
 }
@@ -61,7 +38,7 @@ export function Diamond({
   if (!ring)
     return (
       <span className={className}>
-        <SolidGem size={size} />
+        <Gem size={size * 0.8} />
       </span>
     )
 
@@ -71,11 +48,11 @@ export function Diamond({
       className={`relative grid place-items-center ${className}`}
       style={{ width: box, height: box, perspective: '1000px' }}
     >
-      {/* 核心輝光 */}
-      <div className="absolute inset-[20%] rounded-full bg-eth/35 blur-[46px]" />
-      <div className="absolute inset-[34%] rounded-full bg-eth-2/45 blur-[26px]" />
+      {/* 柔和紫暈 */}
+      <div className="absolute inset-[20%] rounded-full bg-eth/25 blur-[48px]" />
+      <div className="absolute inset-[36%] rounded-full bg-eth-2/25 blur-[30px]" />
 
-      {/* 雷達掃描:虛線外圈慢轉 */}
+      {/* 掃描虛線外圈 */}
       <div
         className="absolute inset-0 animate-spin-slow rounded-full border border-dashed border-eth/25"
         style={{ animationDuration: '30s' }}
@@ -89,20 +66,20 @@ export function Diamond({
         'left-0 bottom-0 border-l border-b',
         'right-0 bottom-0 border-r border-b',
       ].map((pos) => (
-        <span
-          key={pos}
-          className={`absolute size-4 border-eth-2/50 ${pos}`}
-        />
+        <span key={pos} className={`absolute size-4 border-eth/40 ${pos}`} />
       ))}
 
       {/* 3D 軌道環 */}
       <OrbitPlane tilt="rotateX(74deg)" dur={8} color="var(--color-yield)" dot={11} />
-      <OrbitPlane tilt="rotateX(74deg) rotateY(60deg)" dur={12} reverse color="var(--color-eth-2)" dot={8} />
-      <OrbitPlane tilt="rotateX(66deg) rotateY(-50deg)" dur={16} color="#ffffff" dot={5} />
+      <OrbitPlane tilt="rotateX(74deg) rotateY(60deg)" dur={12} reverse color="var(--color-eth)" dot={8} />
+      <OrbitPlane tilt="rotateX(66deg) rotateY(-50deg)" dur={16} color="#4f48bd" dot={5} />
 
-      {/* 中央全像八面體 */}
-      <div className="relative z-10 animate-float">
-        <NeonGem px={size * 1.7} />
+      {/* 中央八面體 */}
+      <div
+        className="relative z-10 animate-float"
+        style={{ filter: 'drop-shadow(0 12px 26px rgba(110,102,232,0.4))' }}
+      >
+        <Gem size={size * 1.7} />
       </div>
     </div>
   )
@@ -123,7 +100,7 @@ function OrbitPlane({
 }) {
   return (
     <div className="absolute inset-[5%]" style={{ transform: tilt }}>
-      <div className="absolute inset-0 rounded-full border border-eth/30" />
+      <div className="absolute inset-0 rounded-full border border-eth/25" />
       <div
         className="absolute inset-0 animate-spin-slow"
         style={{
@@ -137,7 +114,7 @@ function OrbitPlane({
             width: dot,
             height: dot,
             background: color,
-            boxShadow: `0 0 ${dot + 5}px ${dot / 2}px ${color}`,
+            boxShadow: `0 0 ${dot + 4}px ${dot / 3}px ${color}`,
           }}
         />
       </div>

@@ -12,9 +12,9 @@ const LINKS = [
 
 export function Nav({ live }: { live: LiveData }) {
   return (
-    <header className="sticky top-0 z-50 border-b border-ink-line/60 bg-ink/85 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-line bg-paper/80 backdrop-blur-md">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-5">
-        <Link to="/" className="flex items-center gap-2 text-white">
+        <Link to="/" className="flex items-center gap-2 text-text">
           <Diamond size={20} />
           <span className="font-display text-lg font-semibold tracking-tight">
             ETH 質押入門
@@ -26,16 +26,16 @@ export function Nav({ live }: { live: LiveData }) {
             <a
               key={href}
               href={href}
-              className="text-sm text-white/65 transition-colors hover:text-white"
+              className="text-sm text-muted transition-colors hover:text-text"
             >
               {label}
             </a>
           ))}
         </nav>
 
-        <div className="font-mono text-xs text-white/70">
+        <div className="font-mono text-xs text-muted">
           ETH{' '}
-          <span className="text-white">
+          <span className="text-text">
             {live.loading ? '···' : fmtUSD(live.price)}
           </span>
           {live.priceChange24h != null && (
