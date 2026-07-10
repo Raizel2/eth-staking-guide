@@ -13,7 +13,7 @@ function Hero() {
   const live = useLive()
   const range =
     live.aprLow != null && live.aprHigh != null
-      ? `${live.aprLow.toFixed(1)}% – ${live.aprHigh.toFixed(1)}%`
+      ? `${live.aprLow.toFixed(1)}% ~ ${live.aprHigh.toFixed(1)}%`
       : '···'
 
   return (
@@ -25,18 +25,18 @@ function Hero() {
         <div>
           <div className="mb-6 flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-eth-2">
             <span className="size-1.5 animate-pulse rounded-full bg-yield" />
-            實時 ETH 質押收益率 · 年化 APY
+            當前 ETH 質押收益率 (APY)
           </div>
 
           <h1 className="font-display text-6xl font-semibold leading-none tracking-tight tabular-nums md:text-8xl">
             {range}
-            <span className="align-super text-2xl text-eth-2 md:text-3xl">*</span>
+            <span className="align-super text-2xl text-white md:text-3xl">*</span>
           </h1>
 
           <p className="mt-6 max-w-md text-base leading-relaxed text-white/70 md:text-lg">
             質押是指將 ETH 存入驗證者節點，協助區塊驗證並賺取被動收益的操作。
             <span className="text-white/90">
-              本站整理鏈上實時數據、教學、與 0 基礎新手指南。
+              本站彙整鏈上實時數據、教學、與 0 基礎新手指南。
             </span>
           </p>
 
@@ -56,9 +56,8 @@ function Hero() {
           </div>
 
           <p className="mt-6 font-mono text-[11px] leading-relaxed text-white/40">
-            * 數據為即時,從 <SourceLink name="CoinGecko" /> ·{' '}
-            <SourceLink name="DefiLlama" /> · <SourceLink name="ultrasound.money" />{' '}
-            抓取,僅供參考。
+            * 實時浮動,資料源 <SourceLink name="DefiLlama" />、{' '}
+            <SourceLink name="ultrasound.money" />。
           </p>
         </div>
 
