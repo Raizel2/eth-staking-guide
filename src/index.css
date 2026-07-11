@@ -41,9 +41,9 @@
   --color-ink-2: #17698c; /* brand-blue */
   --color-ink-line: #d3e3ea;
 
-  --color-paper: #f4f8fb; /* 內容淺藍白底 */
+  --color-paper: #e6f1f8; /* 乾淨淺藍(不再米白) */
   --color-card: #ffffff;
-  --color-line: #dce7ee;
+  --color-line: #d7e6ef;
 
   --color-text: #1a1a1a;
   --color-muted: #5a6b73;
@@ -51,7 +51,7 @@
 
   --color-eth: #1878b9; /* action-blue(CTA/連結/重點) */
   --color-eth-2: #17698c; /* brand-blue */
-  --color-eth-soft: #eaf3f8; /* bg-light 淺藍 */
+  --color-eth-soft: #dcecf6; /* bg-light 淺藍 tint */
 
   --color-yield: #16a34a; /* 漲綠(台灣慣例) */
   --color-yield-soft: #dcfce7;
@@ -59,7 +59,30 @@
 
   --font-display: 'Noto Sans TC', system-ui, sans-serif; /* 去襯線 */
 
-  background: var(--color-paper);
+  /* 乾淨淺藍底 + 柔和藍色光暈,填滿空白處(取代米白漸層) */
+  background-color: var(--color-paper);
+  background-image:
+    radial-gradient(
+      55% 45% at 88% -5%,
+      rgba(24, 120, 185, 0.18),
+      transparent 70%
+    ),
+    radial-gradient(
+      48% 42% at -5% 30%,
+      rgba(23, 105, 140, 0.13),
+      transparent 70%
+    ),
+    radial-gradient(
+      44% 40% at 100% 102%,
+      rgba(24, 120, 185, 0.12),
+      transparent 70%
+    );
+  background-attachment: fixed;
+}
+/* hero 不用自己的不透明底,讓底層藍光暈透出來,空白處就有設計感 */
+.theme-chainee #top {
+  background-image: none;
+  background-color: transparent;
 }
 /* Chainee:標題偏大偏粗(品牌識別) */
 .theme-chainee h1,
