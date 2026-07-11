@@ -1,6 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
 import { Layout } from './components/Layout'
-import { ChaineeDecor } from './components/ChaineeDecor'
 import Home from './pages/Home'
 import MethodArticle from './pages/MethodArticle'
 import PathProtocol from './pages/PathProtocol'
@@ -12,11 +11,8 @@ import BuyFirstEth from './pages/learn/BuyFirstEth'
 // /v2:同一份 Layout 內容,外層套 Chainee 主題(before/after 對比用)
 function ChaineeLayout() {
   return (
-    <div className="theme-chainee relative">
-      <ChaineeDecor />
-      <div className="relative z-10">
-        <Layout />
-      </div>
+    <div className="theme-chainee">
+      <Layout />
     </div>
   )
 }

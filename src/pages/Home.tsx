@@ -4,7 +4,7 @@ import { useReveal } from '../lib/useReveal'
 import { Diamond } from '../components/Diamond'
 import { Calculator } from '../components/Calculator'
 import { Quiz } from '../components/Quiz'
-import { Eyebrow, StatCard, SourceLink } from '../components/ui'
+import { StatCard, SourceLink } from '../components/ui'
 import { fmtUSD, fmtPct, fmtMillions, fmtInt } from '../lib/format'
 import { METHOD_GROUPS } from '../lib/methods'
 
@@ -35,13 +35,6 @@ function Hero() {
             {range}
             <span className="align-super text-2xl text-faint md:text-3xl">*</span>
           </h1>
-
-          <p className="mt-6 max-w-md text-base leading-relaxed text-muted md:text-lg">
-            質押是指將 ETH 存入驗證者節點，協助區塊驗證並賺取被動收益的操作。
-            <span className="font-medium text-text">
-              本站彙整鏈上實時數據、教學、與 0 基礎新手指南。
-            </span>
-          </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <a
@@ -83,29 +76,13 @@ function MethodSpectrum() {
 
       <div className="reveal mt-10 grid gap-4 md:grid-cols-3">
         {METHOD_GROUPS.map((g) => {
-          const accent = g.key === 'liquid'
           const apr = live[g.aprField]
           return (
             <div
               key={g.key}
-              className={`flex flex-col rounded-2xl border p-6 ${
-                accent ? 'border-eth bg-eth-soft/50' : 'border-line bg-card'
-              }`}
+              className="flex flex-col rounded-2xl border border-line bg-card p-6"
             >
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-[11px] uppercase tracking-wider text-faint">
-                  {g.tag}
-                </span>
-                <span
-                  className="font-mono text-xs text-eth"
-                  aria-label={`難度 ${g.difficulty}/4`}
-                >
-                  {'★'.repeat(g.difficulty)}
-                  <span className="text-line">{'★'.repeat(4 - g.difficulty)}</span>
-                </span>
-              </div>
-
-              <h3 className="mt-3 font-display text-xl font-semibold text-text">
+              <h3 className="font-display text-xl font-semibold text-text">
                 {g.title}
               </h3>
               <div className="mt-1 font-mono text-sm text-yield">
@@ -117,11 +94,7 @@ function MethodSpectrum() {
 
               <Link
                 to={g.article}
-                className={`mt-5 flex items-center justify-center gap-1 rounded-xl px-4 py-3 text-sm font-medium transition-colors ${
-                  accent
-                    ? 'bg-eth text-white hover:bg-eth-2'
-                    : 'border border-ink/15 text-text hover:border-eth hover:text-eth'
-                }`}
+                className="mt-5 flex items-center justify-center gap-1 rounded-xl bg-eth px-4 py-3 text-sm font-medium text-white transition-colors hover:bg-eth-2"
               >
                 {g.articleLabel} →
               </Link>
@@ -194,9 +167,8 @@ function Dashboard() {
     <section id="dashboard" className="mx-auto max-w-6xl px-5 py-20 md:py-24">
       <div className="reveal mb-8 flex flex-wrap items-end justify-between gap-3">
         <div>
-          <Eyebrow>Live · 數據面板</Eyebrow>
           <h2 className="font-display text-3xl font-semibold tracking-tight text-text md:text-4xl">
-            此刻的質押網路
+            實時質押數據
           </h2>
         </div>
         <p className="font-mono text-xs text-faint">
@@ -255,14 +227,10 @@ function Dashboard() {
           loading={live.loading}
         />
         <StatCard
-          label="流動性質押區間"
-          value={
-            live.aprLow != null && live.aprHigh != null
-              ? `${live.aprLow.toFixed(1)}–${live.aprHigh.toFixed(1)}%`
-              : '—'
-          }
-          sub={`${live.protocols.length || ''} 家協議，最低～最高`}
-          source="DefiLlama"
+          label="目前要排隊多久"
+          value={live.queueLabel ?? '—'}
+          sub="新存入的 ETH 進場等待時間"
+          source="validatorqueue.com"
           loading={live.loading}
         />
       </div>
@@ -282,12 +250,8 @@ function Leaderboard() {
       <div className="flex flex-wrap items-end justify-between gap-2 border-b border-line px-6 py-5">
         <div>
           <h3 className="font-display text-xl font-semibold text-text">
-            流動性質押協議 · APR 排行
+            各家流動性質押協議數據
           </h3>
-          <p className="mt-1 text-sm text-muted">
-            依「純質押收益」由高到低。額外獎勵來自再質押／代幣激勵，非 ETH
-            質押本身。
-          </p>
         </div>
         <span className="font-mono text-[11px] text-faint">
           來源 · <SourceLink name="DefiLlama" />

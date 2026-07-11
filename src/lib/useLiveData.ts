@@ -55,6 +55,9 @@ export type LiveData = {
   stakingRatio: number | null
   beaconApr: number | null
 
+  queueDays: number | null // 進場排隊要等幾天(validatorqueue,走 /api)
+  queueLabel: string | null
+
   updatedAt: Date | null
   loading: boolean
 }
@@ -74,6 +77,8 @@ const init: LiveData = {
   totalSupply: null,
   stakingRatio: null,
   beaconApr: null,
+  queueDays: null,
+  queueLabel: null,
   updatedAt: null,
   loading: true,
 }
@@ -111,12 +116,13 @@ export function useLiveData(): LiveData {
         getJSON('https://api.rocketpool.net/api/mainnet/payload'),
         getJSON('https://ultrasound.money/api/v2/fees/validator-rewards'),
         getJSON('https://ultrasound.money/api/v2/fees/eth-supply-parts'),
+        getJSON('/api/queue'),
         ...PROTOCOLS.map(fetchProtocol),
       ])
 
       if (!alive) return
 
-      const [priceR, rpR, soloR, supplyR, ...protoR] = results
+      const [priceR, rpR, soloR, supplyR, queueR, ...protoR] = results
 
       // 價格
       let price: number | null = null
@@ -189,6 +195,14 @@ export function useLiveData(): LiveData {
       const saasApr = gross != null ? gross * 0.95 : null
       const liquidApr = gross != null ? gross * 0.9 : null
 
+      // 進場排隊(走 /api/queue,本機 dev 無 serverless 會拿不到 → null)
+      let queueDays: number | null = null
+      let queueLabel: string | null = null
+      if (queueR.status === 'fulfilled') {
+        queueDays = queueR.value?.days ?? null
+        queueLabel = queueR.value?.label ?? null
+      }
+
       setData({
         price,
         priceChange24h,
@@ -204,6 +218,8 @@ export function useLiveData(): LiveData {
         totalSupply,
         stakingRatio,
         beaconApr,
+        queueDays,
+        queueLabel,
         updatedAt: new Date(),
         loading: false,
       })

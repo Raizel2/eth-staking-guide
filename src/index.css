@@ -59,13 +59,17 @@
 
   --font-display: 'Noto Sans TC', system-ui, sans-serif; /* 去襯線 */
 
-  /* 乾淨淺藍底(不用漸層光暈,空白處靠實際 SVG 設計物填) */
+  /* 乾淨、平面的淺藍底(不要任何漸層/光暈,解決米白感) */
   background-color: var(--color-paper);
 }
-/* hero 不用自己的不透明底,讓底層與裝飾物透出來 */
+/* hero 用乾淨平面淺藍,拿掉自己的漸層底 */
 .theme-chainee #top {
   background-image: none;
-  background-color: transparent;
+  background-color: var(--color-paper);
+}
+/* 隱藏 hero 那兩團模糊光暈(就是米白/漸層的元凶) */
+.theme-chainee #top > .pointer-events-none {
+  display: none;
 }
 /* Chainee:標題偏大偏粗(品牌識別) */
 .theme-chainee h1,

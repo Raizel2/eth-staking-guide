@@ -8,6 +8,7 @@ export const SOURCE_URLS: Record<string, string> = {
   'ultrasound.money': 'https://ultrasound.money/',
   DefiLlama: 'https://defillama.com/lsd',
   Lido: 'https://lido.fi/',
+  'validatorqueue.com': 'https://www.validatorqueue.com/',
 }
 
 // 來源名稱 → 若有對應原始頁,渲染成可點連結;沒有就純文字

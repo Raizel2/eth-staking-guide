@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import { Diamond } from './Diamond'
-import { SourceLink } from './ui'
 
 export function Footer() {
   return (
@@ -23,16 +22,14 @@ export function Footer() {
             </span>
           </Link>
           <div className="font-mono text-xs">
-            資料來源 · <SourceLink name="CoinGecko" /> ·{' '}
-            <SourceLink name="ultrasound.money" /> · <SourceLink name="DefiLlama" />{' '}
-            ·{' '}
+            製表：
             <a
-              href="https://ethereum.org/zh-tw/staking/"
+              href="https://chainee.io"
               target="_blank"
               rel="noopener noreferrer"
-              className="underline decoration-dotted underline-offset-2 hover:text-eth-2"
+              className="font-semibold text-eth underline decoration-dotted underline-offset-2 hover:text-eth-2"
             >
-              ethereum.org
+              鏈習生 Chainee
             </a>
           </div>
         </div>

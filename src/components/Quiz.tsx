@@ -84,17 +84,13 @@ export function Quiz() {
               <h3 className="font-display text-2xl font-semibold leading-snug text-text md:text-3xl">
                 {step.q}
               </h3>
-              {history.length > 0 ? (
+              {history.length > 0 && (
                 <button
                   onClick={back}
                   className="w-fit font-mono text-xs text-muted transition-colors hover:text-text"
                 >
                   ← 上一題
                 </button>
-              ) : (
-                <span className="font-mono text-xs text-faint">
-                  依你的狀況,給你最適合的起點
-                </span>
               )}
             </div>
 
@@ -106,14 +102,7 @@ export function Quiz() {
                   onClick={() => choose(a)}
                   className="group flex items-center justify-between gap-3 rounded-xl border border-line bg-paper px-5 py-4 text-left transition-all hover:border-eth hover:bg-eth-soft/40"
                 >
-                  <span>
-                    <span className="font-medium text-text">{a.label}</span>
-                    {a.hint && (
-                      <span className="mt-0.5 block font-mono text-xs text-faint">
-                        {a.hint}
-                      </span>
-                    )}
-                  </span>
+                  <span className="font-medium text-text">{a.label}</span>
                   <span className="text-eth transition-transform group-hover:translate-x-1">
                     →
                   </span>
