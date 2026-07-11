@@ -17,13 +17,7 @@ function Hero() {
       : '···'
 
   return (
-    <section
-      id="top"
-      className="relative overflow-hidden bg-gradient-to-b from-eth-soft/50 via-paper to-paper text-text"
-    >
-      <div className="pointer-events-none absolute -right-32 -top-32 size-[480px] rounded-full bg-eth/15 blur-[120px]" />
-      <div className="pointer-events-none absolute -bottom-40 -left-20 size-[420px] rounded-full bg-eth-2/10 blur-[120px]" />
-
+    <section id="top" className="relative overflow-hidden bg-paper text-text">
       <div className="mx-auto grid max-w-6xl items-center gap-8 px-5 py-20 md:grid-cols-[1fr_0.9fr] md:py-28">
         <div>
           <div className="mb-6 flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-eth">

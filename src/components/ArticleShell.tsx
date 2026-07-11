@@ -27,8 +27,7 @@ export function ArticleShell({
   return (
     <article>
       {/* 標題區 */}
-      <header className="relative overflow-hidden border-b border-line bg-gradient-to-b from-eth-soft/50 to-paper">
-        <div className="pointer-events-none absolute -right-24 -top-24 size-80 rounded-full bg-eth/12 blur-[110px]" />
+      <header className="border-b border-line bg-eth-soft">
         <div className="mx-auto max-w-3xl px-5 py-16 md:py-20">
           <Link
             to="/"

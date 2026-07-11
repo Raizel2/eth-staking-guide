@@ -51,10 +51,6 @@ export function Diamond({
       className={`relative grid place-items-center ${className}`}
       style={{ width: box, height: box, perspective: '1000px' }}
     >
-      {/* 柔和紫暈 */}
-      <div className="absolute inset-[20%] rounded-full bg-eth/25 blur-[48px]" />
-      <div className="absolute inset-[36%] rounded-full bg-eth-2/25 blur-[30px]" />
-
       {/* 掃描虛線外圈 */}
       <div
         className="absolute inset-0 animate-spin-slow rounded-full border border-dashed border-eth/25"
@@ -75,12 +71,12 @@ export function Diamond({
       {/* 3D 軌道環 */}
       <OrbitPlane tilt="rotateX(74deg)" dur={8} color="var(--color-yield)" dot={11} />
       <OrbitPlane tilt="rotateX(74deg) rotateY(60deg)" dur={12} reverse color="var(--color-eth)" dot={8} />
-      <OrbitPlane tilt="rotateX(66deg) rotateY(-50deg)" dur={16} color="#4f48bd" dot={5} />
+      <OrbitPlane tilt="rotateX(66deg) rotateY(-50deg)" dur={16} color="var(--color-eth-2)" dot={5} />
 
       {/* 中央八面體 */}
       <div
         className="relative z-10 animate-float"
-        style={{ filter: 'drop-shadow(0 12px 26px rgba(110,102,232,0.4))' }}
+        style={{ filter: 'drop-shadow(0 12px 24px rgba(48,128,255,0.32))' }}
       >
         <Gem size={size * 1.7} />
       </div>
