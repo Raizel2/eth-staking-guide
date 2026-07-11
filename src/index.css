@@ -59,27 +59,10 @@
 
   --font-display: 'Noto Sans TC', system-ui, sans-serif; /* 去襯線 */
 
-  /* 乾淨淺藍底 + 柔和藍色光暈,填滿空白處(取代米白漸層) */
+  /* 乾淨淺藍底(不用漸層光暈,空白處靠實際 SVG 設計物填) */
   background-color: var(--color-paper);
-  background-image:
-    radial-gradient(
-      55% 45% at 88% -5%,
-      rgba(24, 120, 185, 0.18),
-      transparent 70%
-    ),
-    radial-gradient(
-      48% 42% at -5% 30%,
-      rgba(23, 105, 140, 0.13),
-      transparent 70%
-    ),
-    radial-gradient(
-      44% 40% at 100% 102%,
-      rgba(24, 120, 185, 0.12),
-      transparent 70%
-    );
-  background-attachment: fixed;
 }
-/* hero 不用自己的不透明底,讓底層藍光暈透出來,空白處就有設計感 */
+/* hero 不用自己的不透明底,讓底層與裝飾物透出來 */
 .theme-chainee #top {
   background-image: none;
   background-color: transparent;
