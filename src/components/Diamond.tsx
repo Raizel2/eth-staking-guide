@@ -15,7 +15,10 @@ function Gem({ size }: { size: number }) {
       <path d="M16 1 L30 18 L16 25 L2 18 Z" fill="var(--color-eth-2)" />
       <path d="M16 1 L30 18 L16 25 Z" fill="var(--color-eth)" />
       <path d="M2 18 L16 25 L16 39 Z" fill="var(--color-eth)" opacity="0.85" />
-      <path d="M30 18 L16 25 L16 39 Z" fill="#4f48bd" />
+      <path
+        d="M30 18 L16 25 L16 39 Z"
+        fill="color-mix(in srgb, var(--color-eth) 72%, #000)"
+      />
       <path
         d="M16 1 L30 18 L16 25 L2 18 Z"
         stroke="#ffffff"

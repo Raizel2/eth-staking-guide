@@ -25,9 +25,59 @@
 
   --color-warn: #b9542f;
 
+  /* 金橘(僅供 Chainee 主題的單一主 CTA 用) */
+  --color-gold: #f7931a;
+  --color-gold-2: #ffb347;
+
   --font-display: 'Fraunces', Georgia, serif;
   --font-sans: 'Noto Sans TC', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* ───────── Chainee 主題(/v2):結構不變,只換顏色 + 字體 ─────────
+   深青 brand-dark、主題藍、action 藍;金橘只給 hero 一顆主 CTA;去紫、去襯線。 */
+.theme-chainee {
+  --color-ink: #1b5a6b; /* brand-dark 深青 */
+  --color-ink-2: #17698c; /* brand-blue */
+  --color-ink-line: #d3e3ea;
+
+  --color-paper: #f4f8fb; /* 內容淺藍白底 */
+  --color-card: #ffffff;
+  --color-line: #dce7ee;
+
+  --color-text: #1a1a1a;
+  --color-muted: #5a6b73;
+  --color-faint: #93a3ab;
+
+  --color-eth: #1878b9; /* action-blue(CTA/連結/重點) */
+  --color-eth-2: #17698c; /* brand-blue */
+  --color-eth-soft: #eaf3f8; /* bg-light 淺藍 */
+
+  --color-yield: #16a34a; /* 漲綠(台灣慣例) */
+  --color-yield-soft: #dcfce7;
+  --color-warn: #dc2626; /* 跌紅 */
+
+  --font-display: 'Noto Sans TC', system-ui, sans-serif; /* 去襯線 */
+
+  background: var(--color-paper);
+}
+/* Chainee:標題偏大偏粗(品牌識別) */
+.theme-chainee h1,
+.theme-chainee h2,
+.theme-chainee h3 {
+  font-weight: 800;
+}
+/* 金橘只准出現在這一顆主 CTA */
+.theme-chainee .hero-primary {
+  background-image: linear-gradient(
+    135deg,
+    var(--color-gold-2),
+    var(--color-gold)
+  );
+  color: #fff;
+}
+.theme-chainee .hero-primary:hover {
+  filter: brightness(1.05);
 }
 
 html {

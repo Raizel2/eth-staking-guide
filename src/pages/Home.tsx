@@ -46,7 +46,7 @@ function Hero() {
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <a
               href="#methods"
-              className="rounded-lg bg-eth px-6 py-3 text-sm font-medium text-white transition-transform hover:-translate-y-0.5 hover:bg-eth-2"
+              className="hero-primary rounded-lg bg-eth px-6 py-3 text-sm font-medium text-white transition-transform hover:-translate-y-0.5 hover:bg-eth-2"
             >
               我有哪些選擇 →
             </a>
