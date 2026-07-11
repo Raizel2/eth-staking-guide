@@ -33,7 +33,7 @@ function Hero() {
 
           <h1 className="font-display text-6xl font-semibold leading-none tracking-tight tabular-nums text-ink md:text-8xl">
             {range}
-            <span className="align-super text-2xl text-eth md:text-3xl">*</span>
+            <span className="align-super text-2xl text-faint md:text-3xl">*</span>
           </h1>
 
           <p className="mt-6 max-w-md text-base leading-relaxed text-muted md:text-lg">
