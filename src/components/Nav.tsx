@@ -5,7 +5,6 @@ import type { LiveData } from '../lib/useLiveData'
 
 const LINKS = [
   ['試算', '/#calc'],
-  ['診斷', '/#quiz'],
   ['方式', '/#methods'],
   ['數據', '/#dashboard'],
 ]

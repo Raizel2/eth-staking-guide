@@ -3,7 +3,6 @@ import { useLive } from '../components/Layout'
 import { useReveal } from '../lib/useReveal'
 import { Diamond } from '../components/Diamond'
 import { Calculator } from '../components/Calculator'
-import { Quiz } from '../components/Quiz'
 import { StatCard, SourceLink } from '../components/ui'
 import { fmtUSD, fmtPct, fmtMillions, fmtInt } from '../lib/format'
 import { METHOD_GROUPS } from '../lib/methods'
@@ -308,7 +307,6 @@ export default function Home() {
       </section>
       <Learn />
       <MethodSpectrum />
-      <Quiz />
       <Dashboard />
     </>
   )
