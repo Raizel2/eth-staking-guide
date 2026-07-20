@@ -68,15 +68,15 @@ export function Diamond({
         <span key={pos} className={`absolute size-4 border-eth/40 ${pos}`} />
       ))}
 
-      {/* 3D 軌道環 */}
-      <OrbitPlane tilt="rotateX(74deg)" dur={8} color="var(--color-yield)" dot={11} />
-      <OrbitPlane tilt="rotateX(74deg) rotateY(60deg)" dur={12} reverse color="var(--color-eth)" dot={8} />
-      <OrbitPlane tilt="rotateX(66deg) rotateY(-50deg)" dur={16} color="var(--color-eth-2)" dot={5} />
+      {/* 3D 軌道環:金黃(鏈習生金幣感)+ 白 + 漲綠 */}
+      <OrbitPlane tilt="rotateX(74deg)" dur={8} color="var(--color-star)" dot={11} />
+      <OrbitPlane tilt="rotateX(74deg) rotateY(60deg)" dur={12} reverse color="#ffffff" dot={8} />
+      <OrbitPlane tilt="rotateX(66deg) rotateY(-50deg)" dur={16} color="var(--color-yield)" dot={5} />
 
       {/* 中央八面體 */}
       <div
         className="relative z-10 animate-float"
-        style={{ filter: 'drop-shadow(0 12px 24px rgba(48,128,255,0.32))' }}
+        style={{ filter: 'drop-shadow(0 12px 24px rgba(5,60,83,0.35))' }}
       >
         <Gem size={size * 1.7} />
       </div>

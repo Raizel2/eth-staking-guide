@@ -114,7 +114,7 @@ export function Calculator({ live }: { live: LiveData }) {
     <div id="calc">
       <div className="grid gap-5 md:grid-cols-2">
       {/* ── 左卡：設定 ── */}
-      <div className="rounded-2xl border border-line bg-card p-7 shadow-[0_8px_30px_rgba(20,20,30,0.06)] md:p-8">
+      <div className="rounded-xl border border-line bg-card p-7 shadow-card md:p-8">
         <Eyebrow>以太坊質押試算</Eyebrow>
 
         {/* 投入方案 */}
@@ -216,14 +216,14 @@ export function Calculator({ live }: { live: LiveData }) {
 
         <a
           href="#methods"
-          className="mt-7 flex w-full items-center justify-center gap-1 rounded-xl bg-ink px-6 py-3.5 text-sm font-medium text-white transition-colors hover:bg-ink-2"
+          className="btn-blue mt-7 flex w-full items-center justify-center gap-1 rounded-[4px] px-6 py-3.5 text-sm font-bold"
         >
           怎麼開始?看三種方式 →
         </a>
       </div>
 
       {/* ── 右卡：結果 + 曲線 ── */}
-      <div className="flex flex-col rounded-2xl border border-eth/30 bg-eth-soft/40 p-7 text-text shadow-[0_8px_30px_rgba(110,102,232,0.08)] md:p-8">
+      <div className="flex flex-col rounded-xl border border-line bg-eth-soft/50 p-7 text-text shadow-panel md:p-8">
         <div className="flex items-start justify-between">
           <div>
             <div className="font-mono text-xs uppercase tracking-wider text-muted">
@@ -250,7 +250,7 @@ export function Calculator({ live }: { live: LiveData }) {
             <button
               key={p}
               onClick={() => setYears(p)}
-              className={`rounded-lg py-2 font-mono text-sm transition-colors ${
+              className={`rounded-[4px] py-2 font-mono text-sm transition-colors ${
                 years === p
                   ? 'bg-eth text-white'
                   : 'bg-card text-muted hover:text-eth'

@@ -47,6 +47,19 @@ export function Eyebrow({
   )
 }
 
+// 難度星等(鏈習生課程卡風格):金星 = 難度,滿分 4
+export function Stars({ n, max = 4 }: { n: number; max?: number }) {
+  return (
+    <span className="text-sm tracking-widest" aria-label={`難度 ${n} / ${max}`}>
+      {Array.from({ length: max }, (_, i) => (
+        <span key={i} className={i < n ? 'text-star' : 'text-white/25'}>
+          ★
+        </span>
+      ))}
+    </span>
+  )
+}
+
 // 數據卡（儀表板用）
 export function StatCard({
   label,
@@ -62,11 +75,11 @@ export function StatCard({
   loading: boolean
 }) {
   return (
-    <div className="rounded-xl border border-line bg-card p-6 shadow-[0_1px_2px_rgba(20,20,30,0.04)]">
+    <div className="rounded-xl border border-line bg-card p-6 shadow-card">
       <div className="font-mono text-xs uppercase tracking-wider text-faint">
         {label}
       </div>
-      <div className="mt-3 font-mono text-3xl font-semibold tabular-nums text-text md:text-4xl">
+      <div className="mt-3 font-mono text-3xl font-semibold tabular-nums text-ink md:text-4xl">
         {loading ? <span className="text-faint">···</span> : value}
       </div>
       {sub && <div className="mt-1 text-sm text-muted">{sub}</div>}

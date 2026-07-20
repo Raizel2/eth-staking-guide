@@ -3,7 +3,7 @@ import { useLive } from '../components/Layout'
 import { useReveal } from '../lib/useReveal'
 import { Diamond } from '../components/Diamond'
 import { Calculator } from '../components/Calculator'
-import { StatCard, SourceLink } from '../components/ui'
+import { StatCard, SourceLink, Stars } from '../components/ui'
 import { fmtUSD, fmtPct, fmtMillions, fmtInt } from '../lib/format'
 import { METHOD_GROUPS } from '../lib/methods'
 
@@ -16,37 +16,43 @@ function Hero() {
       : '···'
 
   return (
-    <section id="top" className="relative overflow-hidden bg-paper text-text">
-      <div className="mx-auto grid max-w-6xl items-center gap-8 px-5 py-20 md:grid-cols-[1fr_0.9fr] md:py-28">
+    <section id="top" className="bg-hero-sky relative overflow-hidden">
+      <div className="mx-auto grid max-w-6xl items-center gap-8 px-5 py-16 md:grid-cols-[1.05fr_0.95fr] md:py-24">
         <div>
-          <div className="mb-6 flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-eth">
-            <span className="size-1.5 animate-pulse rounded-full bg-yield" />
-            當前 ETH 質押收益率 (APY)
+          <div className="inline-flex items-center gap-2 rounded-full bg-ink/90 px-4 py-1.5 text-xs font-medium tracking-wider text-white">
+            <span className="size-1.5 animate-pulse rounded-full bg-star" />
+            當前 ETH 質押收益率(APY)
           </div>
 
-          <h1 className="font-display text-6xl font-semibold leading-none tracking-tight tabular-nums text-ink md:text-8xl">
+          <h1
+            className="title-pop mt-6 text-6xl leading-tight tabular-nums md:text-[5.5rem] md:leading-[1.15]"
+            data-text={range}
+          >
             {range}
-            <span className="align-super text-2xl text-faint md:text-3xl">*</span>
           </h1>
 
-          <div className="mt-8 flex flex-wrap items-center gap-4">
+          <p className="mt-4 max-w-md text-[15px] leading-relaxed text-ink/85">
+            不用賣掉手上的 ETH,質押就有收益。先看即時數據,再挑適合你的方式。
+          </p>
+
+          <div className="mt-7 flex flex-wrap items-center gap-4">
             <a
               href="#methods"
-              className="hero-primary rounded-lg bg-eth px-6 py-3 text-sm font-medium text-white transition-transform hover:-translate-y-0.5 hover:bg-eth-2"
+              className="btn-orange rounded-[4px] px-7 py-3 text-[15px] font-bold transition-transform hover:-translate-y-0.5"
             >
               我有哪些選擇 →
             </a>
             <a
               href="#learn"
-              className="rounded-lg border border-line bg-card px-6 py-3 text-sm font-medium text-text transition-colors hover:border-eth hover:text-eth"
+              className="rounded-[4px] bg-white px-7 py-3 text-[15px] font-bold text-eth shadow-card transition-transform hover:-translate-y-0.5"
             >
               什麼是以太幣質押
             </a>
           </div>
 
-          <p className="mt-6 font-mono text-[11px] leading-relaxed text-faint">
-            * 實時浮動,資料源 <SourceLink name="DefiLlama" />、{' '}
-            <SourceLink name="ultrasound.money" />。
+          <p className="mt-6 font-mono text-[11px] leading-relaxed text-ink/60">
+            數字實時浮動 · 資料源 <SourceLink name="DefiLlama" />、{' '}
+            <SourceLink name="ultrasound.money" />
           </p>
         </div>
 
@@ -63,9 +69,12 @@ function MethodSpectrum() {
   const live = useLive()
   return (
     <section id="methods" className="mx-auto max-w-6xl px-5 py-20 md:py-24">
-      <h2 className="reveal font-display text-3xl font-semibold leading-tight tracking-tight text-text md:text-4xl">
+      <h2 className="reveal text-center font-display text-3xl tracking-wide text-eth md:text-4xl">
         三種最常見的質押方式
       </h2>
+      <p className="reveal mt-3 text-center text-sm text-muted">
+        星星越多,門檻與技術難度越高
+      </p>
 
       <div className="reveal mt-10 grid gap-4 md:grid-cols-3">
         {METHOD_GROUPS.map((g) => {
@@ -73,21 +82,24 @@ function MethodSpectrum() {
           return (
             <div
               key={g.key}
-              className="flex flex-col rounded-2xl border border-line bg-card p-6"
+              className="card-teal flex flex-col rounded-xl p-6 text-white shadow-panel"
             >
-              <h3 className="font-display text-xl font-semibold text-text">
-                {g.title}
-              </h3>
-              <div className="mt-1 font-mono text-sm text-yield">
+              <div className="flex items-center justify-between gap-2">
+                <h3 className="font-display text-xl tracking-wide">
+                  {g.title}
+                </h3>
+                <Stars n={g.difficulty} />
+              </div>
+              <div className="mt-1 font-mono text-sm text-[#7ee2a8]">
                 實時年化 ~{apr != null ? apr.toFixed(2) + '%' : '—'}
               </div>
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">
+              <p className="mt-3 flex-1 text-sm leading-relaxed text-white/85">
                 {g.oneLiner}
               </p>
 
               <Link
                 to={g.article}
-                className="mt-5 flex items-center justify-center gap-1 rounded-xl bg-eth px-4 py-3 text-sm font-medium text-white transition-colors hover:bg-eth-2"
+                className="mt-5 flex items-center justify-center gap-1 rounded-[4px] bg-white px-4 py-3 text-sm font-bold text-eth transition-colors hover:bg-eth-soft"
               >
                 {g.articleLabel} →
               </Link>
@@ -119,10 +131,10 @@ function Learn() {
     ],
   ]
   return (
-    <section id="learn" className="bg-eth-soft/30 py-20 md:py-24">
+    <section id="learn" className="bg-candles-light py-20 md:py-24">
       <div className="mx-auto max-w-6xl px-5">
-        <div className="reveal max-w-3xl">
-          <h2 className="font-display text-4xl font-semibold leading-tight tracking-tight text-text md:text-5xl">
+        <div className="reveal mx-auto max-w-3xl text-center">
+          <h2 className="font-display text-4xl leading-tight tracking-wide text-eth md:text-5xl">
             什麼是以太幣質押？
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-muted">
@@ -136,13 +148,13 @@ function Learn() {
             <Link
               key={to}
               to={to}
-              className="group rounded-xl border border-line bg-card p-6 transition-colors hover:border-eth"
+              className="group rounded-xl bg-card p-6 shadow-card transition-transform hover:-translate-y-1"
             >
-              <h3 className="font-display text-xl font-semibold text-text">
+              <h3 className="font-display text-xl text-eth">
                 {title}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-muted">{desc}</p>
-              <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-eth transition-transform group-hover:translate-x-1">
+              <span className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-eth transition-transform group-hover:translate-x-1">
                 閱讀 →
               </span>
             </Link>
@@ -160,7 +172,7 @@ function Dashboard() {
     <section id="dashboard" className="mx-auto max-w-6xl px-5 py-20 md:py-24">
       <div className="reveal mb-8 flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h2 className="font-display text-3xl font-semibold tracking-tight text-text md:text-4xl">
+          <h2 className="font-display text-3xl tracking-wide text-eth md:text-4xl">
             實時質押數據
           </h2>
         </div>
@@ -239,10 +251,10 @@ function Leaderboard() {
   const top = live.aprHigh
 
   return (
-    <div className="reveal mt-6 overflow-hidden rounded-2xl border border-line bg-card">
+    <div className="reveal mt-6 overflow-hidden rounded-xl border border-line bg-card shadow-card">
       <div className="flex flex-wrap items-end justify-between gap-2 border-b border-line px-6 py-5">
         <div>
-          <h3 className="font-display text-xl font-semibold text-text">
+          <h3 className="font-display text-xl text-eth">
             各家流動性質押協議數據
           </h3>
         </div>
@@ -264,7 +276,7 @@ function Leaderboard() {
             >
               <span
                 className={`font-mono text-sm tabular-nums ${
-                  i === 0 ? 'font-bold text-eth' : 'text-faint'
+                  i === 0 ? 'font-bold text-star' : 'text-faint'
                 }`}
               >
                 {String(i + 1).padStart(2, '0')}

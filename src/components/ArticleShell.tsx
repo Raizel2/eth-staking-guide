@@ -27,7 +27,7 @@ export function ArticleShell({
   return (
     <article>
       {/* 標題區 */}
-      <header className="border-b border-line bg-eth-soft">
+      <header className="bg-candles-light border-b border-line">
         <div className="mx-auto max-w-3xl px-5 py-16 md:py-20">
           <Link
             to="/"
@@ -39,7 +39,7 @@ export function ArticleShell({
             <Diamond size={13} />
             {kicker}
           </div>
-          <h1 className="mt-4 font-display text-4xl font-semibold leading-tight tracking-tight text-ink md:text-5xl">
+          <h1 className="mt-4 font-display text-4xl leading-tight tracking-wide text-eth md:text-5xl">
             {title}
           </h1>
           <p className="mt-5 text-lg leading-relaxed text-muted">{intro}</p>
@@ -60,7 +60,7 @@ export function ArticleShell({
                 <Link
                   key={r.to}
                   to={r.to}
-                  className="group flex items-center justify-between rounded-xl border border-line bg-card px-5 py-4 transition-colors hover:border-eth"
+                  className="group flex items-center justify-between rounded-xl border border-line bg-card px-5 py-4 shadow-card transition-all hover:-translate-y-0.5 hover:border-eth"
                 >
                   <span className="font-medium text-text">{r.label}</span>
                   <span className="text-eth transition-transform group-hover:translate-x-1">

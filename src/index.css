@@ -1,51 +1,119 @@
 @import 'tailwindcss';
 
 /* ───────────────────────── 設計 token ─────────────────────────
-   配色語意化：靛紫 = 以太坊/網路、墨綠 = 報酬/收益、深墨藍 = hero 底。
-   字體：Fraunces（英文標題）+ Noto Sans TC（中文內文）+ JetBrains Mono（數據）。 */
+   鏈習生(Chainee)藍綠家族:深藍綠 #0b5b7c 當主色、天空藍質感底、
+   金黃 #f7b500 點綴星等、橘漸層只給導流 CTA。
+   字體:Huninn 粉圓(中文標題)+ Noto Sans TC(內文)+ JetBrains Mono(數據)。 */
 @theme {
-  /* 深藍黑:標題 / 深色元素 */
-  --color-ink: #101828;
-  --color-ink-2: #1d2939;
-  --color-ink-line: #d4dfec;
+  /* 深墨藍綠:標題最深階 / nav / 頁尾 */
+  --color-ink: #053c53;
+  --color-ink-2: #06455f;
+  --color-ink-line: #bcd8e6;
 
-  --color-paper: #f6f9fd; /* 近白帶極淡藍,主底 */
+  --color-paper: #fbfdfe; /* 近白帶極淡藍,主底 */
   --color-card: #ffffff; /* 白卡片 */
-  --color-line: #e2e8f2;
+  --color-line: #dbe9f1;
 
-  --color-text: #17202e;
-  --color-muted: #5a6b7b;
-  --color-faint: #94a3b3;
+  --color-text: #1c3440;
+  --color-muted: #52707e;
+  --color-faint: #8aa4b0;
 
-  --color-eth: #3080ff; /* RWA 主色藍 */
-  --color-eth-2: #1f66e0; /* 深一階(hover) */
-  --color-eth-soft: #e8f0ff; /* 淺藍區塊 / tint */
+  --color-eth: #0b5b7c; /* 鏈習生主色深藍綠 */
+  --color-eth-2: #053c53; /* 深一階(hover) */
+  --color-eth-soft: #e3f2fa; /* 天空藍 tint */
+
+  --color-sky: #7cc0de; /* hero 天空藍 */
 
   --color-yield: #16a34a; /* 漲綠(台灣慣例) */
   --color-yield-soft: #dcfce7;
 
   --color-warn: #dc2626; /* 跌紅 */
 
-  /* 金橘:只給 hero 那唯一一顆主 CTA */
+  /* 橘:導流 CTA;金黃:星等/點綴 */
   --color-gold: #f7931a;
   --color-gold-2: #ffb347;
+  --color-star: #f7b500;
 
-  --font-display: 'Noto Sans TC', system-ui, sans-serif; /* 去襯線 */
+  /* 鏈習生實測陰影:藍調、大範圍、極淡 */
+  --shadow-card: 0 8px 30px rgba(3, 57, 138, 0.06);
+  --shadow-panel: 0 0 50px rgba(3, 57, 138, 0.08);
+  --shadow-btn: 0 4px 12px rgba(16, 83, 180, 0.25);
+
+  --font-display: 'Huninn', 'Noto Sans TC', system-ui, sans-serif;
   --font-sans: 'Noto Sans TC', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 }
 
-/* 金橘只准出現在 hero 這一顆主 CTA */
-.hero-primary {
-  background-image: linear-gradient(
-    135deg,
-    var(--color-gold-2),
-    var(--color-gold)
-  );
-  color: #fff;
+/* Huninn 只有一個字重,擋掉瀏覽器假粗體(會糊) */
+.font-display {
+  font-weight: 400;
 }
-.hero-primary:hover {
-  filter: brightness(1.05);
+
+/* ── 鏈習生式按鈕:135° 三段漸層、微字距(圓角交給 utility) ── */
+.btn-blue {
+  background-image: linear-gradient(135deg, #144a99, #1262a7, #1085bc);
+  color: #fff;
+  letter-spacing: 0.04em;
+  box-shadow: 0 4px 12px rgba(16, 83, 180, 0.25);
+}
+.btn-blue:hover {
+  filter: brightness(1.08);
+}
+.btn-orange {
+  background-image: linear-gradient(135deg, #f7931a, #e06726, #f7931a);
+  color: #fff;
+  letter-spacing: 0.04em;
+  box-shadow: 0 4px 12px rgba(224, 103, 38, 0.35);
+}
+.btn-orange:hover {
+  filter: brightness(1.07);
+}
+
+/* ── 招牌字效:白字 + 深藍綠描邊 + 硬陰影(鏈習生 hero 標題)──
+   用法:<h1 class="title-pop" data-text="跟內文一字不差">…</h1> */
+.title-pop {
+  position: relative;
+  z-index: 0;
+  font-family: var(--font-display);
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+.title-pop::before {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  color: var(--color-ink);
+  -webkit-text-stroke: 0.13em var(--color-ink);
+  text-shadow: 0.05em 0.07em 0 rgba(5, 60, 83, 0.3);
+}
+
+/* ── 材質:天空藍 hero(雜訊 + 白 K 線水印)── */
+.bg-hero-sky {
+  background-color: #8cc9e2;
+  background-image:
+    url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.055 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='260'%3E%3Cg stroke='%23ffffff' stroke-opacity='0.16' stroke-width='3' fill='%23ffffff' fill-opacity='0.13'%3E%3Cline x1='45' y1='28' x2='45' y2='160'/%3E%3Crect x='31' y='58' width='28' height='74' rx='4'/%3E%3Cline x1='135' y1='84' x2='135' y2='236'/%3E%3Crect x='121' y='118' width='28' height='88' rx='4'/%3E%3Cline x1='225' y1='8' x2='225' y2='132'/%3E%3Crect x='211' y='36' width='28' height='64' rx='4'/%3E%3C/g%3E%3C/svg%3E"),
+    linear-gradient(165deg, #b7e2f3 0%, #8cc9e2 55%, #6fb6d6 100%);
+}
+
+/* ── 材質:近白底 + 淡藍 K 線水印(知識區 / 文章頁頭)── */
+.bg-candles-light {
+  background-color: #f2f8fc;
+  background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='260'%3E%3Cg stroke='%23a8cde2' stroke-opacity='0.3' stroke-width='3' fill='%23a8cde2' fill-opacity='0.22'%3E%3Cline x1='45' y1='28' x2='45' y2='160'/%3E%3Crect x='31' y='58' width='28' height='74' rx='4'/%3E%3Cline x1='135' y1='84' x2='135' y2='236'/%3E%3Crect x='121' y='118' width='28' height='88' rx='4'/%3E%3Cline x1='225' y1='8' x2='225' y2='132'/%3E%3Crect x='211' y='36' width='28' height='64' rx='4'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* ── 材質:深藍綠卡片 + 同心圓紋理(三種方式,像鏈習生 4 大關鍵卡)── */
+.card-teal {
+  background-color: #0b5b7c;
+  background-image:
+    url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='520' height='520'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='0.055' stroke-width='1.4'%3E%3Ccircle cx='430' cy='90' r='40'/%3E%3Ccircle cx='430' cy='90' r='82'/%3E%3Ccircle cx='430' cy='90' r='124'/%3E%3Ccircle cx='430' cy='90' r='166'/%3E%3Ccircle cx='430' cy='90' r='208'/%3E%3Ccircle cx='430' cy='90' r='250'/%3E%3Ccircle cx='430' cy='90' r='292'/%3E%3Ccircle cx='430' cy='90' r='334'/%3E%3C/g%3E%3C/svg%3E"),
+    linear-gradient(150deg, #0d6288 0%, #084a68 55%, #053c53 100%);
+  background-repeat: no-repeat, no-repeat;
+  background-position:
+    right -60px top -60px,
+    center;
+  background-size: auto, cover;
 }
 
 html {
@@ -64,12 +132,7 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* 標題用 Fraunces，視覺重量集中在這裡 */
-.font-display {
-  font-optical-sizing: auto;
-}
-
-/* ── 招牌：八面體 + 收益環的旋轉動畫 ── */
+/* ── 招牌:八面體 + 收益環的旋轉動畫 ── */
 @keyframes spin-slow {
   to {
     transform: rotate(360deg);
@@ -102,7 +165,7 @@ body {
   animation: float-soft 6s ease-in-out infinite;
 }
 
-/* 捲動進場：預設隱藏，加上 .in 後升起 */
+/* 捲動進場:預設隱藏,加上 .in 後升起 */
 .reveal {
   opacity: 0;
   transform: translateY(18px);
@@ -115,7 +178,7 @@ body {
   transform: none;
 }
 
-/* ── 文章內文排版（給 path / learn 頁面用） ── */
+/* ── 文章內文排版(給 path / learn 頁面用)── */
 .prose {
   color: var(--color-muted);
   font-size: 1.0625rem;
@@ -126,19 +189,20 @@ body {
 }
 .prose h2 {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 400;
   font-size: 1.6rem;
   line-height: 1.25;
-  color: var(--color-text);
+  color: var(--color-eth);
   margin-top: 2.75rem;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.02em;
 }
 .prose h3 {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 400;
   font-size: 1.2rem;
-  color: var(--color-text);
+  color: var(--color-eth);
   margin-top: 1.75rem;
+  letter-spacing: 0.02em;
 }
 .prose strong {
   font-weight: 600;
@@ -168,7 +232,7 @@ body {
 }
 .prose .callout {
   border-left: 3px solid var(--color-warn);
-  background: #fbf2ee;
+  background: #fdf1ee;
   border-radius: 0 8px 8px 0;
   padding: 1rem 1.25rem;
   color: var(--color-text);

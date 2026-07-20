@@ -140,15 +140,15 @@ function DestCTA({ dests }: { dests: DestKey[] }) {
             href={d.url}
             target="_blank"
             rel="noopener noreferrer"
-            className={`flex items-center justify-between gap-3 rounded-xl border p-5 transition-all hover:-translate-y-0.5 ${
+            className={`flex items-center justify-between gap-3 rounded-xl border p-5 shadow-card transition-all hover:-translate-y-0.5 ${
               primary
-                ? 'border-eth bg-eth-soft/60'
+                ? 'border-gold/60 bg-[#fff6ea]'
                 : 'border-line bg-card'
             }`}
           >
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-display text-lg font-semibold text-text">
+                <span className="font-display text-lg text-text">
                   {d.name}
                 </span>
                 <span className="rounded-full bg-ink/5 px-2 py-0.5 font-mono text-[11px] text-muted">
@@ -157,7 +157,7 @@ function DestCTA({ dests }: { dests: DestKey[] }) {
               </div>
               <div className="mt-1 text-sm text-muted">{d.ctaLabel}</div>
             </div>
-            <span className="text-eth">→</span>
+            <span className={primary ? 'text-gold' : 'text-eth'}>→</span>
           </a>
         )
       })}
