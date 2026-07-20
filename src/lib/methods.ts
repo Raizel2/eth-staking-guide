@@ -10,7 +10,7 @@ export type DestKey = 'binance' | 'lido' | 'figment' | 'solo'
 export type Dest = {
   key: DestKey
   name: string
-  tag: string // 一句話標籤(CeFi/DeFi 等)
+  tag: string // 簡短標籤(CeFi/DeFi 等)
   custody: string
   min: string
   blurb: string
@@ -27,7 +27,7 @@ export const DESTINATIONS: Record<DestKey, Dest> = {
     tag: 'CeFi · 交易所',
     custody: '託管(幣安保管)',
     min: '0 門檻',
-    blurb: '本來就在幣安的話,買 WBETH 就開始生息——最無腦的一站。',
+    blurb: '本來就在幣安的話,買 WBETH 就開始生息,最無腦的一站。',
     pro: '最簡單、免錢包、免研究、隨時買賣',
     con: '幣託管在幣安(私鑰不在你手上)',
     ctaLabel: '由此註冊幣安 · 省 20% 手續費',
@@ -90,7 +90,7 @@ export const METHOD_GROUPS: MethodGroup[] = [
     title: '自己跑節點',
     tag: '完全自主 · 0 抽成',
     difficulty: 4,
-    oneLiner: '自己架驗證節點,收益全歸你——但要 32 ETH、要技術與維運。',
+    oneLiner: '自己架驗證節點,收益全歸你,但要 32 ETH、要技術與維運。',
     aprField: 'soloApr',
     article: '/method/solo',
     articleLabel: '了解自己跑節點',

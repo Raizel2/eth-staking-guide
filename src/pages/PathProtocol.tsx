@@ -5,7 +5,7 @@ export default function PathProtocol() {
     <ArticleShell
       kicker="路線 · 用協議或平台"
       title="交給協議或平台來質押"
-      intro="不用 32 ETH、不用架機器。把質押交給 Lido、Rocket Pool 這類協議，或直接用交易所——任意金額、幾下完成，是大多數人的起點。"
+      intro="不用 32 ETH、不用架機器。把質押交給 Lido、Rocket Pool 這類協議，或直接用交易所:任意金額、幾下完成，是大多數人的起點。"
       related={[
         { to: '/path/solo', label: '另一條路：自己跑節點' },
         { to: '/learn/pos', label: 'stETH、rETH 到底是什麼？' },
@@ -34,7 +34,7 @@ export default function PathProtocol() {
       <h3>3. 交易所質押（Binance、Coinbase 等）</h3>
       <p>
         最簡單：在你買幣的交易所裡點一下就開始。介面友善、門檻最低。但 ETH{' '}
-        <strong>完全託管在平台</strong>——平台若凍結、倒閉，你可能拿不回來。
+        <strong>完全託管在平台</strong>，若平台凍結、倒閉，你可能拿不回來。
       </p>
 
       <div className="note">

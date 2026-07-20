@@ -28,7 +28,7 @@ export default function Pos() {
         <strong>罰沒</strong>並踢出場。
       </p>
       <p>
-        押上的那 32 ETH 就是「我會誠實」的保證金——這就是「權益證明」名字的由來：用你的權益（本金）來證明你會守規矩。
+        押上的那 32 ETH 就是「我會誠實」的保證金，這就是「權益證明」名字的由來：用你的權益（本金）來證明你會守規矩。
       </p>
 
       <h2>四種質押工具，差在哪？</h2>
@@ -50,12 +50,12 @@ export default function Pos() {
       </p>
       <ul>
         <li>
-          <strong>stETH（Lido）：</strong>採「rebase」——你錢包裡的 stETH
+          <strong>stETH（Lido）：</strong>採「rebase」設計，你錢包裡的 stETH
           餘額會隨獎勵每天慢慢變多，1 stETH 大致對應 1 ETH。
         </li>
         <li>
           <strong>rETH（Rocket Pool）：</strong>數量不變，但
-          <strong>每顆 rETH 能換回的 ETH 會隨時間變多</strong>——獎勵反映在價格上。
+          <strong>每顆 rETH 能換回的 ETH 會隨時間變多</strong>，獎勵反映在價格上。
         </li>
       </ul>
 

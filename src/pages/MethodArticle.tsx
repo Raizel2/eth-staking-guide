@@ -31,7 +31,7 @@ const CONTENT: Record<string, Content> = {
         <p>
           你把 ETH 交給質押服務,它立刻給你一張等值的
           <strong>憑證代幣</strong>(例如 Lido 的 stETH、幣安的 WBETH)。這張憑證會隨質押收益慢慢增值,而且你
-          <strong>隨時可以在市場上賣掉變現</strong>——不用等退出排隊,這就是「流動性」的意思。
+          <strong>隨時可以在市場上賣掉變現</strong>,不用等退出排隊,這就是「流動性」的意思。
         </p>
         <h2>兩種來源,本質都是流動性質押</h2>
         <p>
@@ -90,7 +90,7 @@ const CONTENT: Record<string, Content> = {
     kicker: '方式 · 自己跑節點',
     title: '自己跑節點',
     intro:
-      '押滿 32 ETH、自己架驗證節點。零抽成、收益全歸你、最去中心化——代價是技術與維運責任都在你身上。',
+      '押滿 32 ETH、自己架驗證節點。零抽成、收益全歸你、最去中心化;代價是技術與維運責任都在你身上。',
     dests: ['solo'],
     related: [
       { to: '/method/saas', label: '不想顧機器?看 SaaS 質押' },
@@ -117,7 +117,7 @@ const CONTENT: Record<string, Content> = {
           <strong>罰沒(slashing)</strong>,長期離線也會被扣分。
         </p>
         <div className="callout">
-          最大的雷:同一把驗證者金鑰千萬別同時在兩台機器運行——這是觸發罰沒最常見的原因。
+          最大的雷:同一把驗證者金鑰千萬別同時在兩台機器運行,這是觸發罰沒最常見的原因。
         </div>
         <p>官方的質押啟動器與客戶端清單,都在以太坊官網:</p>
       </>

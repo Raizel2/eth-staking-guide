@@ -34,7 +34,7 @@ function SoloYield() {
         ))}
       </dl>
       <p className="mt-4 text-[11px] leading-relaxed text-faint">
-        無協議抽成，三塊全歸你。但 MEV 與小費隨網路活動浮動、且「看運氣」——單一節點某段時間可能高於或低於這個平均。
+        無協議抽成，三塊全歸你。但 MEV 與小費隨網路活動浮動、且「看運氣」:單一節點某段時間可能高於或低於這個平均。
       </p>
     </div>
   )
@@ -45,7 +45,7 @@ export default function PathSolo() {
     <ArticleShell
       kicker="路線 · 自己跑節點"
       title="自己跑一個驗證節點"
-      intro="押滿 32 ETH、自己架設並維護驗證者。沒有中間人抽成，收益與掌控權最高，也最貼近以太坊去中心化的精神——代價是技術門檻與責任都在你身上。"
+      intro="押滿 32 ETH、自己架設並維護驗證者。沒有中間人抽成，收益與掌控權最高，也最貼近以太坊去中心化的精神;代價是技術門檻與責任都在你身上。"
       related={[
         { to: '/path/protocol', label: '另一條路：交給協議或平台' },
         { to: '/learn/pos', label: '驗證者到底在做什麼？' },
@@ -55,7 +55,7 @@ export default function PathSolo() {
       <p>
         你<strong>有 32 顆 ETH</strong>、願意動手學一點技術、能讓一台機器穩定上線，並且重視
         <strong>完全自管、不被抽成、最大化去中心化</strong>
-        ——那自跑節點會給你最純粹的質押體驗。
+        ,那自跑節點會給你最純粹的質押體驗。
       </p>
 
       <h2>你需要什麼</h2>
@@ -93,7 +93,7 @@ export default function PathSolo() {
           <strong>離線罰款：</strong>沒做到該做的見證，會被小額扣分。偶爾離線影響很小，長期離線才痛。
         </li>
         <li>
-          <strong>維運責任：</strong>更新、備份、監控都得自己來——把它當成一台要長期照顧的小伺服器。
+          <strong>維運責任：</strong>更新、備份、監控都得自己來,把它當成一台要長期照顧的小伺服器。
         </li>
       </ul>
 
@@ -111,7 +111,7 @@ export default function PathSolo() {
       </ul>
 
       <div className="callout">
-        最大的雷：千萬不要讓同一把驗證者金鑰同時在兩台機器上運行——這是觸發罰沒最常見的原因。換機器要先確認舊的完全停止。
+        最大的雷：千萬不要讓同一把驗證者金鑰同時在兩台機器上運行,這是觸發罰沒最常見的原因。換機器要先確認舊的完全停止。
       </div>
     </ArticleShell>
   )

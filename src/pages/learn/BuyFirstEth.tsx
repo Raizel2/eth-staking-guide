@@ -22,7 +22,7 @@ export default function BuyFirstEth() {
       <p>
         交易所是你用法幣換加密貨幣的入口。挑選時看三件事：
         <strong>合規與信譽</strong>、<strong>是否支援台幣入金</strong>、
-        <strong>手續費</strong>。台灣與國際都有不少選擇——這裡不替任何一家背書，請自己多查評價、從規模大、營運久的開始。
+        <strong>手續費</strong>。台灣與國際都有不少選擇。這裡不替任何一家背書，請自己多查評價、從規模大、營運久的開始。
       </p>
 
       <h2>2. 開戶與身分驗證</h2>
@@ -38,7 +38,7 @@ export default function BuyFirstEth() {
 
       <h2>4. 買進 ETH</h2>
       <p>
-        在交易所找到 ETH 交易對，輸入金額下單即可。你不必買「一整顆」——ETH
+        在交易所找到 ETH 交易對，輸入金額下單即可。你不必買「一整顆」，ETH
         可以買零頭，幾百塊台幣也能開始。
       </p>
 

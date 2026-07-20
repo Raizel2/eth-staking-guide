@@ -278,7 +278,7 @@ export function Calculator({ live }: { live: LiveData }) {
         <p className="mt-5 text-[11px] leading-relaxed text-faint">
           依目前 APR 複利推估，<strong className="text-muted">非保證</strong>
           ；APR 會隨參與人數浮動，未計手續費、稅與幣價變動。報酬以 ETH
-          計——顆數變多，幣價下跌仍可能讓帳面縮水。
+          計；顆數變多，幣價下跌仍可能讓帳面縮水。
         </p>
       </div>
       </div>
