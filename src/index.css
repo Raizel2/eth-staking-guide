@@ -158,11 +158,24 @@ body {
   }
 }
 
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
 .animate-spin-slow {
   animation: spin-slow 22s linear infinite;
 }
 .animate-float {
   animation: float-soft 6s ease-in-out infinite;
+}
+.animate-twinkle {
+  animation: twinkle 3.2s ease-in-out infinite;
 }
 
 /* 捲動進場:預設隱藏,加上 .in 後升起 */
@@ -254,7 +267,8 @@ body {
     scroll-behavior: auto;
   }
   .animate-spin-slow,
-  .animate-float {
+  .animate-float,
+  .animate-twinkle {
     animation: none;
   }
   .reveal {

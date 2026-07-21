@@ -12,7 +12,11 @@ import { METHOD_GROUPS } from '../lib/methods'
    「親眼看到它算出來」是最強的實時感;reduced-motion 直接顯示終值。
    背景分頁 RAF 不會觸發 → 等分頁變可見那一刻才起跑,
    使用者第一眼永遠看到完整動畫(而不是卡在 ···)。 */
-function useCountUp(target: number | null, dur = 1000): number | null {
+function useCountUp(
+  target: number | null,
+  replayKey = 0,
+  dur = 1000,
+): number | null {
   const [val, setVal] = useState<number | null>(null)
   useEffect(() => {
     if (target == null) return
@@ -43,18 +47,20 @@ function useCountUp(target: number | null, dur = 1000): number | null {
       document.removeEventListener('visibilitychange', onVis)
       cancelAnimationFrame(raf)
     }
-  }, [target, dur])
+  }, [target, replayKey, dur])
   return val
 }
 
 /* ── Hero：收益區間 + 即時價格 ── */
 function Hero() {
   const live = useLive()
-  const lo = useCountUp(live.aprLow)
-  const hi = useCountUp(live.aprHigh)
+  // updatedAt 當 replayKey:手動刷新後即使 APR 沒變,也重播進場滾動
+  const replay = live.updatedAt?.getTime() ?? 0
+  const lo = useCountUp(live.aprLow, replay)
+  const hi = useCountUp(live.aprHigh, replay)
   const range =
     lo != null && hi != null
-      ? `${lo.toFixed(1)}% ~ ${hi.toFixed(1)}%`
+      ? `${lo.toFixed(2)}% ~ ${hi.toFixed(2)}%`
       : '···'
 
   return (
@@ -63,7 +69,7 @@ function Hero() {
         <div>
           <div className="inline-flex items-center gap-2 rounded-full bg-ink/90 px-4 py-1.5 text-xs font-medium tracking-wider text-white">
             <span className="size-1.5 animate-pulse rounded-full bg-star" />
-            實時偵測中 · ETH 質押收益率(APY)
+            ETH 質押收益率(APY)
           </div>
 
           <h1
@@ -74,13 +80,19 @@ function Hero() {
           </h1>
 
           <p className="mt-3 font-mono text-xs text-ink/70">
-            ⟳ 更新於{' '}
-            {live.updatedAt
-              ? live.updatedAt.toLocaleTimeString('zh-TW', {
-                  hour: '2-digit',
-                  minute: '2-digit',
-                })
-              : '--:--'}{' '}
+            <button
+              onClick={live.refresh}
+              title="按一下重新抓取最新數據"
+              className="cursor-pointer rounded-[4px] px-1 py-0.5 transition-colors hover:bg-white/40 hover:text-ink"
+            >
+              ⟳ 更新於{' '}
+              {live.updatedAt
+                ? live.updatedAt.toLocaleTimeString('zh-TW', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                  })
+                : '--:--'}
+            </button>{' '}
             · 來源 <SourceLink name="DefiLlama" />
           </p>
 

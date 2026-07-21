@@ -19,9 +19,13 @@ export function ArticleShell({
   children: ReactNode
   related?: Related[]
 }) {
-  // 換頁時回到頂端
+  // 換頁時回到頂端 + 設頁面標題(SEO / 分頁辨識)
   useEffect(() => {
     window.scrollTo(0, 0)
+    document.title = `${title}｜ETH 質押入門`
+    return () => {
+      document.title = 'ETH 質押入門'
+    }
   }, [title])
 
   return (

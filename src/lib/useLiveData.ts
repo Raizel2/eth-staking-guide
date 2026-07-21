@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { parseNum } from './format'
 
 // 即時資料，全部免金鑰、CORS 全開、可在瀏覽器直接 fetch：
@@ -61,6 +61,7 @@ export type LiveData = {
 
   updatedAt: Date | null
   loading: boolean
+  refresh: () => void // 手動重抓一次(hero 時間戳可按)
 }
 
 const init: LiveData = {
@@ -82,6 +83,7 @@ const init: LiveData = {
   queueLabel: null,
   updatedAt: null,
   loading: true,
+  refresh: () => {},
 }
 
 async function getJSON(url: string) {
@@ -105,6 +107,7 @@ async function fetchProtocol(p: (typeof PROTOCOLS)[number]): Promise<Protocol> {
 
 export function useLiveData(): LiveData {
   const [data, setData] = useState<LiveData>(init)
+  const [tick, setTick] = useState(0)
 
   useEffect(() => {
     let alive = true
@@ -227,6 +230,7 @@ export function useLiveData(): LiveData {
         queueLabel,
         updatedAt: new Date(),
         loading: false,
+        refresh: () => {}, // 佔位:對外回傳時會被真的 refresh 蓋掉
       })
     }
 
@@ -234,7 +238,8 @@ export function useLiveData(): LiveData {
     return () => {
       alive = false
     }
-  }, [])
+  }, [tick])
 
-  return data
+  const refresh = useCallback(() => setTick((t) => t + 1), [])
+  return { ...data, refresh }
 }

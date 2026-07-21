@@ -1,6 +1,6 @@
 // 招牌元素:以太坊八面體。
-//  ring=false → 純鑽石(nav / bullet)
-//  ring=true  → hero 用:立體八面體 + 3D 軌道環 + 柔和光暈(淺底友善)
+//  ring=false → 純鑽石(nav / bullet / 頁尾)
+//  ring=true  → hero 主視覺:立體寶石 + 金幣 + 星芒(鏈習生 3D 插畫感)
 
 function Gem({ size }: { size: number }) {
   return (
@@ -29,6 +29,81 @@ function Gem({ size }: { size: number }) {
   )
 }
 
+// 四點星芒(鏈習生標題旁的 ✦)
+function Spark({
+  x,
+  y,
+  s,
+  fill,
+  delay = 0,
+}: {
+  x: number
+  y: number
+  s: number
+  fill: string
+  delay?: number
+}) {
+  return (
+    <path
+      d={`M${x} ${y - s} Q${x + s * 0.18} ${y - s * 0.18} ${x + s} ${y} Q${x + s * 0.18} ${y + s * 0.18} ${x} ${y + s} Q${x - s * 0.18} ${y + s * 0.18} ${x - s} ${y} Q${x - s * 0.18} ${y - s * 0.18} ${x} ${y - s}Z`}
+      fill={fill}
+      className="animate-twinkle"
+      style={{ animationDelay: `${delay}s` }}
+    />
+  )
+}
+
+// 有厚度的 Ξ 金幣
+function Coin({
+  cx,
+  cy,
+  r,
+  delay = 0,
+}: {
+  cx: number
+  cy: number
+  r: number
+  delay?: number
+}) {
+  const bar = r * 0.78
+  return (
+    <g className="animate-float" style={{ animationDelay: `${delay}s` }}>
+      <circle cx={cx} cy={cy + r * 0.14} r={r} fill="#c68e08" />
+      <circle cx={cx} cy={cy} r={r} fill="#f0ac0a" />
+      <circle cx={cx} cy={cy} r={r * 0.8} fill="#ffd76a" />
+      <circle
+        cx={cx}
+        cy={cy}
+        r={r * 0.8}
+        fill="none"
+        stroke="#b57f00"
+        strokeOpacity="0.35"
+        strokeWidth={r * 0.05}
+      />
+      {/* Ξ:三條橫槓 */}
+      {[-0.36, 0, 0.36].map((dy, i) => (
+        <rect
+          key={dy}
+          x={cx - bar / 2 + (i === 1 ? bar * 0.1 : 0)}
+          y={cy + dy * r - r * 0.09}
+          width={i === 1 ? bar * 0.8 : bar}
+          height={r * 0.18}
+          rx={r * 0.09}
+          fill="#b57f00"
+        />
+      ))}
+      <path
+        d={`M${cx - r * 0.55} ${cy - r * 0.62} A ${r * 0.82} ${r * 0.82} 0 0 1 ${cx + r * 0.4} ${cy - r * 0.72}`}
+        fill="none"
+        stroke="#fff3cf"
+        strokeWidth={r * 0.1}
+        strokeLinecap="round"
+        opacity="0.9"
+      />
+    </g>
+  )
+}
+
 export function Diamond({
   size = 28,
   ring = false,
@@ -47,76 +122,86 @@ export function Diamond({
 
   const box = size * 5.2
   return (
-    <div
-      className={`relative grid place-items-center ${className}`}
-      style={{ width: box, height: box, perspective: '1000px' }}
-    >
-      {/* 掃描虛線外圈 */}
-      <div
-        className="absolute inset-0 animate-spin-slow rounded-full border border-dashed border-eth/25"
-        style={{ animationDuration: '30s' }}
-      />
-      <div className="absolute inset-[8%] rounded-full border border-eth/10" />
-
-      {/* HUD 角標 */}
-      {[
-        'left-0 top-0 border-l border-t',
-        'right-0 top-0 border-r border-t',
-        'left-0 bottom-0 border-l border-b',
-        'right-0 bottom-0 border-r border-b',
-      ].map((pos) => (
-        <span key={pos} className={`absolute size-4 border-eth/40 ${pos}`} />
-      ))}
-
-      {/* 3D 軌道環:金黃(鏈習生金幣感)+ 白 + 漲綠 */}
-      <OrbitPlane tilt="rotateX(74deg)" dur={8} color="var(--color-star)" dot={11} />
-      <OrbitPlane tilt="rotateX(74deg) rotateY(60deg)" dur={12} reverse color="#ffffff" dot={8} />
-      <OrbitPlane tilt="rotateX(66deg) rotateY(-50deg)" dur={16} color="var(--color-yield)" dot={5} />
-
-      {/* 中央八面體 */}
-      <div
-        className="relative z-10 animate-float"
-        style={{ filter: 'drop-shadow(0 12px 24px rgba(5,60,83,0.35))' }}
+    <div className={className} style={{ width: box, height: box }}>
+      <svg
+        viewBox="0 0 360 360"
+        width="100%"
+        height="100%"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
       >
-        <Gem size={size * 1.7} />
-      </div>
-    </div>
-  )
-}
-
-function OrbitPlane({
-  tilt,
-  dur,
-  reverse = false,
-  color,
-  dot,
-}: {
-  tilt: string
-  dur: number
-  reverse?: boolean
-  color: string
-  dot: number
-}) {
-  return (
-    <div className="absolute inset-[5%]" style={{ transform: tilt }}>
-      <div className="absolute inset-0 rounded-full border border-eth/25" />
-      <div
-        className="absolute inset-0 animate-spin-slow"
-        style={{
-          animationDuration: `${dur}s`,
-          animationDirection: reverse ? 'reverse' : 'normal',
-        }}
-      >
-        <span
-          className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full"
-          style={{
-            width: dot,
-            height: dot,
-            background: color,
-            boxShadow: `0 0 ${dot + 4}px ${dot / 3}px ${color}`,
-          }}
+        {/* 背景底盤:柔白圓 + 細環,像商品攝影的打光台 */}
+        <circle cx="180" cy="176" r="150" fill="#ffffff" opacity="0.22" />
+        <circle
+          cx="180"
+          cy="176"
+          r="150"
+          stroke="#ffffff"
+          strokeOpacity="0.4"
+          strokeWidth="1.5"
         />
-      </div>
+        <circle
+          cx="180"
+          cy="176"
+          r="122"
+          stroke="#ffffff"
+          strokeOpacity="0.22"
+          strokeWidth="1"
+        />
+
+        {/* 地面陰影 */}
+        <ellipse cx="180" cy="312" rx="86" ry="15" fill="#053c53" opacity="0.16" />
+
+        {/* 主寶石:四面光影 + 白稜線(光源右上) */}
+        <g className="animate-float">
+          <polygon points="180,58 96,182 166,204" fill="#0d6288" />
+          <polygon points="180,58 264,182 166,204" fill="#1085bc" />
+          <polygon points="96,182 180,300 166,204" fill="#084a68" />
+          <polygon points="264,182 180,300 166,204" fill="#053c53" />
+          <g stroke="#ffffff" strokeLinejoin="round">
+            <polyline
+              points="96,182 180,58 264,182"
+              strokeOpacity="0.55"
+              strokeWidth="2.5"
+              fill="none"
+            />
+            <polyline
+              points="96,182 166,204 264,182"
+              strokeOpacity="0.35"
+              strokeWidth="1.5"
+              fill="none"
+            />
+            <polyline
+              points="180,58 166,204 180,300"
+              strokeOpacity="0.3"
+              strokeWidth="1.5"
+              fill="none"
+            />
+            <polygon
+              points="180,58 96,182 180,300 264,182"
+              strokeOpacity="0.5"
+              strokeWidth="2"
+              fill="none"
+            />
+          </g>
+          {/* 頂部高光 */}
+          <polygon
+            points="180,58 208,100 190,106"
+            fill="#ffffff"
+            opacity="0.5"
+          />
+        </g>
+
+        {/* 金幣:一大一小,浮動相位錯開 */}
+        <Coin cx={84} cy={252} r={36} delay={1.2} />
+        <Coin cx={290} cy={92} r={24} delay={2.6} />
+
+        {/* 星芒 */}
+        <Spark x={62} y={96} s={12} fill="#ffffff" delay={0} />
+        <Spark x={306} y={196} s={9} fill="#ffd76a" delay={1.4} />
+        <Spark x={238} y={40} s={7} fill="#ffffff" delay={2.2} />
+      </svg>
     </div>
   )
 }

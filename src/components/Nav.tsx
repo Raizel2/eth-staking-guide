@@ -4,9 +4,10 @@ import { fmtUSD } from '../lib/format'
 import type { LiveData } from '../lib/useLiveData'
 
 const LINKS = [
-  ['試算', '/#calc'],
-  ['方式', '/#methods'],
-  ['數據', '/#dashboard'],
+  ['收益試算', '/#calc'],
+  ['知識補帖', '/#learn'],
+  ['質押方式', '/#methods'],
+  ['實時數據', '/#dashboard'],
 ]
 
 export function Nav({ live }: { live: LiveData }) {
@@ -52,10 +53,12 @@ export function Nav({ live }: { live: LiveData }) {
             )}
           </div>
           <a
-            href="/#calc"
+            href="https://chainee.io/bitopro-signup"
+            target="_blank"
+            rel="noopener noreferrer"
             className="btn-orange hidden rounded-full px-4 py-1.5 text-xs font-bold sm:block"
           >
-            免費試算
+            首次買幣
           </a>
         </div>
       </div>

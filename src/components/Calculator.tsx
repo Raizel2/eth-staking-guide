@@ -126,13 +126,13 @@ export function Calculator({ live }: { live: LiveData }) {
             className="w-full appearance-none rounded-xl border border-line bg-paper px-4 py-3.5 font-medium text-text outline-none transition-colors focus:border-eth"
           >
             <option value="liquid">
-              流動性質押 · 實時年化 {aprText(live.liquidApr)}
+              流動性質押 · 參考年化 {aprText(live.liquidApr)}
             </option>
             <option value="saas">
-              SaaS 質押 · 實時年化 {aprText(live.saasApr)}
+              SaaS 質押 · 參考年化 {aprText(live.saasApr)}
             </option>
             <option value="solo">
-              自己跑節點 · 實時年化 {aprText(live.soloApr)}
+              自己跑節點 · 參考年化 {aprText(live.soloApr)}
             </option>
           </select>
           <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-faint">
