@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useLive } from '../components/Layout'
 import { useReveal } from '../lib/useReveal'
@@ -7,12 +8,53 @@ import { StatCard, SourceLink, Stars } from '../components/ui'
 import { fmtUSD, fmtPct, fmtMillions, fmtInt } from '../lib/format'
 import { METHOD_GROUPS } from '../lib/methods'
 
+/* 進場滾動:數據到手後從 0 滾到實際值,~1 秒 ease-out。
+   「親眼看到它算出來」是最強的實時感;reduced-motion 直接顯示終值。
+   背景分頁 RAF 不會觸發 → 等分頁變可見那一刻才起跑,
+   使用者第一眼永遠看到完整動畫(而不是卡在 ···)。 */
+function useCountUp(target: number | null, dur = 1000): number | null {
+  const [val, setVal] = useState<number | null>(null)
+  useEffect(() => {
+    if (target == null) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setVal(target)
+      return
+    }
+    let raf = 0
+    const start = () => {
+      const t0 = performance.now()
+      const tick = (t: number) => {
+        const p = Math.min(1, (t - t0) / dur)
+        const e = 1 - Math.pow(1 - p, 3)
+        setVal(target * e)
+        if (p < 1) raf = requestAnimationFrame(tick)
+      }
+      raf = requestAnimationFrame(tick)
+    }
+    const onVis = () => {
+      if (!document.hidden) {
+        document.removeEventListener('visibilitychange', onVis)
+        start()
+      }
+    }
+    if (document.hidden) document.addEventListener('visibilitychange', onVis)
+    else start()
+    return () => {
+      document.removeEventListener('visibilitychange', onVis)
+      cancelAnimationFrame(raf)
+    }
+  }, [target, dur])
+  return val
+}
+
 /* ── Hero：收益區間 + 即時價格 ── */
 function Hero() {
   const live = useLive()
+  const lo = useCountUp(live.aprLow)
+  const hi = useCountUp(live.aprHigh)
   const range =
-    live.aprLow != null && live.aprHigh != null
-      ? `${live.aprLow.toFixed(1)}% ~ ${live.aprHigh.toFixed(1)}%`
+    lo != null && hi != null
+      ? `${lo.toFixed(1)}% ~ ${hi.toFixed(1)}%`
       : '···'
 
   return (
@@ -21,7 +63,7 @@ function Hero() {
         <div>
           <div className="inline-flex items-center gap-2 rounded-full bg-ink/90 px-4 py-1.5 text-xs font-medium tracking-wider text-white">
             <span className="size-1.5 animate-pulse rounded-full bg-star" />
-            當前 ETH 質押收益率(APY)
+            實時偵測中 · ETH 質押收益率(APY)
           </div>
 
           <h1
@@ -31,8 +73,19 @@ function Hero() {
             {range}
           </h1>
 
+          <p className="mt-3 font-mono text-xs text-ink/70">
+            ⟳ 更新於{' '}
+            {live.updatedAt
+              ? live.updatedAt.toLocaleTimeString('zh-TW', {
+                  hour: '2-digit',
+                  minute: '2-digit',
+                })
+              : '--:--'}{' '}
+            · 來源 <SourceLink name="DefiLlama" />
+          </p>
+
           <p className="mt-4 max-w-md text-[15px] leading-relaxed text-ink/85">
-            不用賣掉手上的 ETH,質押就有收益。先看即時數據,再挑適合你的方式。
+            成為以太坊驗證者，免礦機、免耗電、持 ETH 賺 ETH 收益的複利魔法
           </p>
 
           <div className="mt-7 flex flex-wrap items-center gap-4">
@@ -49,11 +102,6 @@ function Hero() {
               什麼是以太幣質押
             </a>
           </div>
-
-          <p className="mt-6 font-mono text-[11px] leading-relaxed text-ink/60">
-            數字實時浮動 · 資料源 <SourceLink name="DefiLlama" />、{' '}
-            <SourceLink name="ultrasound.money" />
-          </p>
         </div>
 
         <div className="flex justify-center md:justify-end">

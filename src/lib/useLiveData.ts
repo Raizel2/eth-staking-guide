@@ -7,8 +7,9 @@ import { parseNum } from './format'
 //  • ultrasound.money   → 自跑節點真實毛收益（發行 + MEV + 小費，無抽成）
 //  • DefiLlama /chart    → 各大流動性質押協議當下 APR（每家一個輕量端點，~26KB）
 //
-// 頭條收益區間 = 流動性協議「純質押收益(apyBase)」的最低～最高（誠實、可比較，
-// 排除再質押/代幣激勵）。自跑節點另計、單獨呈現。
+// 頭條收益區間:下緣 = 流動性質押(毛收益扣 10% 服務費),
+// 上緣 = max(自跑毛收益, 排行榜最高純質押 apyBase)——兩者都是真實數據,
+// 站內排行榜就查得到,樂觀但誠實。排除再質押/代幣激勵。
 
 // 各協議在 DefiLlama 的 pool id（用 /chart/{id} 取最新一筆）
 const PROTOCOLS: { id: string; name: string; symbol: string }[] = [
@@ -211,8 +212,12 @@ export function useLiveData(): LiveData {
         saasApr,
         liquidApr,
         soloBreakdown,
-        aprLow: liquidApr, // 區間下緣 = 流動性
-        aprHigh: gross, // 區間上緣 = 自跑
+        aprLow: liquidApr, // 區間下緣 = 流動性(扣完服務費)
+        // 區間上緣 = 自跑毛收益 vs 排行榜最高純質押年化,取大者(都是真實值)
+        aprHigh:
+          gross != null || bases.length
+            ? Math.max(gross ?? 0, bases.length ? bases[bases.length - 1] : 0)
+            : null,
         totalStaked,
         validators,
         totalSupply,
