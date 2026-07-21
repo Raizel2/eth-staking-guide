@@ -173,21 +173,55 @@ function MethodSpectrum() {
 
 /* ── 什麼是質押 + 三篇知識文章 ── */
 function Learn() {
-  const articles = [
+  // [路由, 分類, 標題, 摘要]
+  const articles: [string, string, string, string][] = [
     [
       '/learn/ethereum',
+      '新手起步',
       '什麼是以太坊？',
       '在談質押之前，先搞懂你要質押的這條網路是什麼。',
     ],
     [
       '/learn/pos',
-      'PoS 與各種質押工具',
-      '權益證明怎麼運作？stETH、rETH 這些憑證又是什麼。',
+      '新手起步',
+      '什麼是權益證明 PoS？',
+      '為什麼從挖礦改成質押？66% 與 33% 的攻擊門檻是怎麼回事？',
     ],
     [
       '/learn/buy-eth',
+      '新手起步',
       '買進你的第一顆 ETH',
       '從零開始：選平台、開戶、買幣、轉進錢包的完整流程。',
+    ],
+    [
+      '/learn/tokenomics',
+      '進階理解',
+      '以太幣的代幣經濟學',
+      '發行量怎麼算？EIP-1559 燒幣為什麼讓交易量變成 ETH 的燃料？',
+    ],
+    [
+      '/learn/steth-vs-wbeth',
+      '進階理解',
+      'stETH 與 WBETH 差在哪？',
+      '一個錨定 1:1、一個永遠比 ETH 貴，兩種憑證的機制與用戶須知。',
+    ],
+    [
+      '/learn/risks',
+      '進階理解',
+      '質押有哪些風險？',
+      '罰沒、離線、合約、託管：把官方列出的風險一次講清楚。',
+    ],
+    [
+      '/learn/eth-is-money',
+      '市場觀點',
+      'ETH is Money',
+      'Tom Lee 們為什麼把 ETH 當貨幣？正反觀點一次看。',
+    ],
+    [
+      '/learn/outlook',
+      '市場觀點',
+      '以太幣的漲跌與前景',
+      '從歷史高點到現貨 ETF 與機構財庫,多空論點並陳。',
     ],
   ]
   return (
@@ -195,25 +229,28 @@ function Learn() {
       <div className="mx-auto max-w-6xl px-5">
         <div className="reveal mx-auto max-w-3xl text-center">
           <h2 className="font-display text-4xl leading-tight tracking-wide text-eth md:text-5xl">
-            什麼是以太幣質押？
+            知識補帖
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-muted">
             把 ETH
-            鎖進以太坊的安全機制、幫忙確認交易，網路再發獎勵給你。它不像挖礦要拼電費與顯卡，靠的是「押上本金、誠實做事」。想從頭弄懂，從這三篇開始。
+            鎖進以太坊的安全機制、幫忙確認交易，網路再發獎勵給你。它不像挖礦要拼電費與顯卡，靠的是「押上本金、誠實做事」。從入門到進階,想弄懂哪一塊就從哪篇開始。
           </p>
         </div>
 
-        <div className="reveal mt-10 grid gap-4 md:grid-cols-3">
-          {articles.map(([to, title, desc]) => (
+        <div className="reveal mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {articles.map(([to, tag, title, desc]) => (
             <Link
               key={to}
               to={to}
-              className="group rounded-xl bg-card p-6 shadow-card transition-transform hover:-translate-y-1"
+              className="group flex flex-col rounded-xl bg-card p-6 shadow-card transition-transform hover:-translate-y-1"
             >
-              <h3 className="font-display text-xl text-eth">
-                {title}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted">{desc}</p>
+              <span className="self-start rounded-full bg-eth-soft px-2.5 py-0.5 text-[11px] font-medium text-eth">
+                {tag}
+              </span>
+              <h3 className="mt-3 font-display text-lg text-eth">{title}</h3>
+              <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">
+                {desc}
+              </p>
               <span className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-eth transition-transform group-hover:translate-x-1">
                 閱讀 →
               </span>

@@ -8,7 +8,7 @@ import { parseNum } from './format'
 //  • DefiLlama /chart    → 各大流動性質押協議當下 APR（每家一個輕量端點，~26KB）
 //
 // 頭條收益區間:下緣 = 流動性質押(毛收益扣 10% 服務費),
-// 上緣 = max(自跑毛收益, 排行榜最高純質押 apyBase)——兩者都是真實數據,
+// 上緣 = max(自跑毛收益, 排行榜最高純質押 apyBase),兩者都是真實數據,
 // 站內排行榜就查得到,樂觀但誠實。排除再質押/代幣激勵。
 
 // 各協議在 DefiLlama 的 pool id（用 /chart/{id} 取最新一筆）

@@ -23,7 +23,7 @@ const CONTENT: Record<string, Content> = {
     dests: ['binance', 'lido'],
     related: [
       { to: '/method/saas', label: '想保有金鑰?看 SaaS 質押' },
-      { to: '/learn/pos', label: 'stETH、WBETH 到底是什麼?' },
+      { to: '/learn/steth-vs-wbeth', label: 'stETH、WBETH 到底是什麼?' },
     ],
     body: (
       <>
